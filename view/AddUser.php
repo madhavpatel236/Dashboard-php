@@ -1,11 +1,13 @@
 <?php
 include dirname(__DIR__) . "/controller/userController.php";
-// print_r($userControllerObj->editUserDetails()); exit;
-
 if ($_SESSION['authenticated'] !== true) {
     header("Location: ../index.php");
     exit;
 }
+
+// echo __LINE__ . var_dump($userControllerObj->editUserDetails());
+// echo __LINE__ . var_dump($userControllerObj->editUserDetails());
+// echo __LINE__ .var_dump($_POST);
 ?>
 
 <!DOCTYPE html>

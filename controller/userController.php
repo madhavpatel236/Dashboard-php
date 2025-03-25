@@ -78,10 +78,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     if (isset($_POST['editUser'])) {
-        $userControllerObj->editUserDetails();
-        // print_r($userControllerObj->editUserDetails()); 
-        header("Location: " . "/Dashboard/view/AddUser.php");
-        // exit;
+        $data = $userControllerObj->editUserDetails();
+        // print_r($data) ; exit;
+        $editUserId = $_POST['editUserId'];
+
+        // function getData($data)
+        // {
+        //     return $data;
+        // };
+
+        header("Location: /Dashboard/view/AddUser.php");
+
+        // $data = getData($editUserId);
+        // $editUserId = $_POST['editUserId'];
+        // header("Location: /Dashboard/view/AddUser.php?editUserId=" . urlencode($editUserId));
+        exit;
     }
 
     if (isset($_POST['deleteUser'])) {
@@ -90,3 +101,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit;
     }
 }
+$userControllerObj = new userController();

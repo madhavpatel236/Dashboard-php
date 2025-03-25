@@ -10,6 +10,7 @@ class userModel
     public $admin_lastName;
     public $admin_email;
     public $admin_password;
+    public $admin_role;
 
     public $userDetails = [];
 
@@ -28,51 +29,51 @@ class userModel
     // admin auth
     public function authentication($email, $password)
     {
-        $admin = "SELECT * FROM userData WHERE role = 'admin' ";
+        // $admin = "SELECT * FROM userData WHERE role = 'admin' ";
+        $admin = "SELECT * FROM userData WHERE Id = 1";
         $adminData = mysqli_query($this->isConnect, $admin);
 
-        $adminList=[];
+        // $adminList = [];
 
         if ($adminData->num_rows > 0) {
             echo "<script> console.log('Admin fatched  sucessfully!') </script>";
             while ($row = $adminData->fetch_assoc()) {
-
-                $adminList = [
-                    'Id' => $row['Id'],
-                    'firstName' => $row['firstName'],
-                    'lastName' => $row['lastName'],
-                    'email' => $row['email'],
-                    'password' => $row['password'],
-                    'role' => $row['role']
-                ];
-
-                // $this->admin_userId = $row['Id'];
-                // $this->admin_firstName = $row['firstName'];
-                // $this->admin_lastName = $row['lastName'];
-                // $this->admin_email = $row['email'];
-                // $this->admin_password = $row['password'];
+                // $adminList[] = [
+                //     'Id' => $row['Id'],
+                //     'firstName' => $row['firstName'],
+                //     'lastName' => $row['lastName'],
+                //     'email' => $row['email'],
+                //     'password' => $row['password'],
+                //     'role' => $row['role']
+                // ];
+                $this->admin_userId = $row['Id'];
+                $this->admin_firstName = $row['firstName'];
+                $this->admin_lastName = $row['lastName'];
+                $this->admin_email = $row['email'];
+                $this->admin_password = $row['password'];
             }
+            // var_dump($adminList);
         } else {
             echo " ADMIN not found";
         }
 
-        // if ($email === $this->admin_email && $password === $this->admin_password) {
-        //     $_SESSION['authenticated'] = true;
-        //     header("Location: " . "/Dashboard/view/AdminHome.php");
-        // } else {
-        //     $userCheck = "SELECT * FROM userData WHERE email = '$email' and password = '$password'";
-        //     $userCheckResult = mysqli_query($this->isConnect, $userCheck);
+        if ($email === $this->admin_email && $password === $this->admin_password) {
+            $_SESSION['authenticated'] = true;
+            header("Location: " . "/Dashboard/view/AdminHome.php");
+        } else {
+            $userCheck = "SELECT * FROM userData WHERE email = '$email' and password = '$password'";
+            $userCheckResult = mysqli_query($this->isConnect, $userCheck);
 
-        //     if ($userCheckResult->num_rows > 0) {
-        //         while ($row = $userCheckResult->fetch_assoc()) {
-        //             $_SESSION['authenticated'] = true;
-        //             header("Location: " . "/Dashboard/view/UserHome.php");
-        //         }
-        //     } else {
-        //         echo 'NO user found';
-        //         header("Location: " . "/Dashboard/view/Error.php");
-        //     }
-        // }
+            if ($userCheckResult->num_rows > 0) {
+                while ($row = $userCheckResult->fetch_assoc()) {
+                    $_SESSION['authenticated'] = true;
+                    header("Location: " . "/Dashboard/view/UserHome.php");
+                }
+            } else {
+                echo 'NO user found';
+                header("Location: " . "/Dashboard/view/Error.php");
+            }
+        }
     }
 
     // Insert data in db 

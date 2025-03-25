@@ -28,7 +28,7 @@ if ($_SESSION['authenticated'] !== true) {
         <?php if (!$_POST['editUserId']): ?>
             <h2 class="heading-addUser"> Add User </h2>
         <?php endif ?>
-        
+
         <?php if ($_POST['editUserId']): ?>
             <input type="hidden" id="userUpdateID" name='userUpdateID' value=" <?php echo $_POST['editUserId'] ?> " />
         <?php endif ?>
@@ -42,14 +42,18 @@ if ($_SESSION['authenticated'] !== true) {
         <input class="input" id="lastname" name="lastname" value="<?php echo $data['lastname'] ?>" />
         <span class="error" name="lastname_error" id="lastname_error"> </span>
 
-        <?php if (!$_POST['editUserId']): ?>
-            <lable class="lable" for="email"> Email: </lable>
-            <input class="input" id="email" name="email" value="<?php echo $data['email'] ?>" />
-            <span class="error" name="email_error" id="email_error"> </span>
+        <lable class="lable" for="email"> Email: </lable>
+        <input class="input" id="email" name="email" value="<?php echo $data['email'] ?>" />
+        <span class="error" name="email_error" id="email_error"> </span>
 
+        <?php if (!$_POST['editUserId']): ?>
             <lable class="lable" for="password"> Password: </lable>
             <input class="input" id="password" name="password" value="<?php echo $data['password'] ?>" />
             <span class="error" name="password_error" id="password_error"> </span>
+        <?php endif; ?>
+        
+        <?php if ($_POST['editUserId']): ?>
+            <input type="hidden" class="input" id="password" name="password" value="<?php echo $data['password'] ?>" />
         <?php endif; ?>
 
         <lable class="lable" for="role"> Role: </lable>

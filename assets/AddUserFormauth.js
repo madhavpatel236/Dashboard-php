@@ -1,4 +1,4 @@
-// // Add user form validatoin - AddUser.php
+// Add user form validatoin - AddUser.php
 document.getElementById("addUserForm").addEventListener("submit", function (e) {
   const firstname = document.getElementById("firstname");
   const lastname = document.getElementById("lastname");

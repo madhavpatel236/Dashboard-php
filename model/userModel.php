@@ -46,30 +46,35 @@ class userModel
                     'role' => $row['role']
                 ];
             }
-            // var_dump($adminList);
-            return $adminList;
         } else {
             echo " ADMIN not found";
         }
 
         // check email id and password for the admin.
         foreach ($adminList as $admin) {
-            if ($admin['email'] === $email && $admin['password'] === $password) {
+            $varifyPassword = password_verify($password, $admin['password']);
+            // var_dump($varifyPassword);
+            if ($admin['email'] === $email && $varifyPassword) {
                 $_SESSION['authenticated'] = true;
                 header("Location: /Dashboard/view/AdminHome.php");
                 exit();
             }
         }
 
+        $varifyPassword = password_verify($password, 'password');
+
+        // db: $2y$10$eD79hKr6HdI2LFczRPJRM.E.vl4HNIYuVBLKn0clf8V4ho5BqE10y 
+        // var_dump(md5($password));
+
         // check for the normal users are present in the db or not.
-        $userCheck = "SELECT * FROM userData WHERE email = '$email' AND password = '$password'";
+        $userCheck = "SELECT * FROM userData WHERE email = '$email' AND password = '$varifyPassword'";
         $userCheckResult = mysqli_query($this->isConnect, $userCheck);
 
         if ($userCheckResult->num_rows > 0) {
             $_SESSION['authenticated'] = true;
             header("Location: /Dashboard/view/UserHome.php");
             exit();
-        } else{
+        } else {
             echo "user not found.";
         }
     }

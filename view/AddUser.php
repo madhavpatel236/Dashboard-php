@@ -1,13 +1,11 @@
 <?php
 include dirname(__DIR__) . "/controller/userController.php";
+
 if ($_SESSION['authenticated'] !== true) {
     header("Location: ../index.php");
     exit;
 }
 
-// echo __LINE__ . var_dump($userControllerObj->editUserDetails());
-// echo __LINE__ . var_dump($userControllerObj->editUserDetails());
-// echo __LINE__ .var_dump($_POST);
 ?>
 
 <!DOCTYPE html>
@@ -26,21 +24,25 @@ if ($_SESSION['authenticated'] !== true) {
     <form id="addUserForm" name="addUserForm" method="post">
         <h2 class="heading-addUser"> Add User </h2>
         <lable class="lable" for="firstname"> First name: </lable>
-        <input class="input" id="firstname" name="firstname" value="<?php  ?>" />
+        <input class="input" id="firstname" name="firstname" value="<?php echo $data['firstname'] ?>" />
         <span class="error" name="firstname_error" id="firstname_error"> </span>
 
 
         <lable class="lable" for="lastname"> Last name: </lable>
-        <input class="input" id="lastname" name="lastname" />
+        <input class="input" id="lastname" name="lastname" value="<?php echo $data['lastname'] ?>" />
         <span class="error" name="lastname_error" id="lastname_error"> </span>
 
         <lable class="lable" for="email"> Email: </lable>
-        <input class="input" id="email" name="email" />
+        <input class="input" id="email" name="email" value="<?php echo $data['email'] ?>" />
         <span class="error" name="email_error" id="email_error"> </span>
 
         <lable class="lable" for="password"> Password: </lable>
-        <input class="input" id="password" name="password" />
+        <input class="input" id="password" name="password" value="<?php echo $data['password'] ?>"/>
         <span class="error" name="password_error" id="password_error"> </span>
+
+        <lable class="lable" for="role"> Role: </lable>
+        <input class="input" id="role" name="role" value="<?php echo $data['role'] ?>"/>
+        <span class="role" name="role_error" id="role_error"> </span>
 
         <button id="submit_btn" name="submit_btn"> Submit </button>
     </form>

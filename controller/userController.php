@@ -7,6 +7,7 @@ class userController
     public $lastname = '';
     public $email = '';
     public $password = '';
+    public $role;
     public $userModelObject;
     public $authControllerObject = '';
     public $userId = '';
@@ -20,6 +21,7 @@ class userController
         $this->lastname = isset($_POST['lastname']) ? $_POST['lastname'] : "";
         $this->email = isset($_POST['email']) ? $_POST['email'] : "";
         $this->password = isset($_POST['password']) ? $_POST['password'] : "";
+        $this->role = isset($_POST['role']) ? $_POST['role'] : "";
         $this->userId = isset($_POST['deleteUser']) ? $_POST['userId'] : "";
         $this->editUserId = $_POST['editUserId'];
         // var_dump($this->authControllerObject);
@@ -44,16 +46,14 @@ class userController
 
     public function InsertData()
     {
-        if ($this->firstname && $this->lastname && $this->email && $this->password) {
-            return $this->userModelObject->createUser($this->firstname, $this->lastname, $this->email, $this->password);
+        if ($this->firstname && $this->lastname && $this->email && $this->password && $this->role) {
+            return $this->userModelObject->createUser($this->firstname, $this->lastname, $this->email, $this->password, $this->role);
         }
     }
 
-    public function  editUserDetails()
+    public function  editUserDetails($editUserId)
     {
-        return $this->userModelObject->edituserData($this->editUserId);
-        // print_r($value);
-        // return $value;
+        return $this->userModelObject->edituserData($editUserId);
     }
 
     public function getAllUserData()
@@ -78,21 +78,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     if (isset($_POST['editUser'])) {
-        $data = $userControllerObj->editUserDetails();
-        // print_r($data) ; exit;
-        $editUserId = $_POST['editUserId'];
-
-        // function getData($data)
-        // {
-        //     return $data;
-        // };
-
-        header("Location: /Dashboard/view/AddUser.php");
-
-        // $data = getData($editUserId);
-        // $editUserId = $_POST['editUserId'];
-        // header("Location: /Dashboard/view/AddUser.php?editUserId=" . urlencode($editUserId));
-        exit;
+        $id = $_POST['editUserId'];
+        $data = $userControllerObj->editUserDetails($id);
     }
 
     if (isset($_POST['deleteUser'])) {

@@ -41,7 +41,7 @@ if ($_SESSION['authenticated'] !== true) {
                 <td class="table-body-data"><?php echo htmlspecialchars($eachUser['email']); ?></td>
                 <td class="table-body-data"><?php echo htmlspecialchars($eachUser['password']); ?></td>
                 <td class="table-body-data">
-                    <form  method="POST">
+                    <form action="./AddUser.php" method="POST">
                         <input type="hidden" name="editUserId" value="<?php echo htmlspecialchars($eachUser['Id']); ?>">
                         <button type="submit" name="editUser" class="edit-btn"> Edit </button>
                     </form>

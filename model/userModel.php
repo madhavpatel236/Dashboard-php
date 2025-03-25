@@ -61,21 +61,21 @@ class userModel
             }
         }
 
-        $varifyPassword = password_verify($password, 'password');
-
-        // db: $2y$10$eD79hKr6HdI2LFczRPJRM.E.vl4HNIYuVBLKn0clf8V4ho5BqE10y 
-        // var_dump(md5($password));
-
-        // check for the normal users are present in the db or not.
-        $userCheck = "SELECT * FROM userData WHERE email = '$email' AND password = '$varifyPassword'";
+        $userCheck = "SELECT * FROM userData WHERE email = '$email'";
         $userCheckResult = mysqli_query($this->isConnect, $userCheck);
-
         if ($userCheckResult->num_rows > 0) {
-            $_SESSION['authenticated'] = true;
-            header("Location: /Dashboard/view/UserHome.php");
-            exit();
+            $user = mysqli_fetch_assoc($userCheckResult);
+            if (password_verify($password, $user['password'])) {
+                $_SESSION['authenticated'] = true;
+                header("Location: /Dashboard/view/UserHome.php");
+                exit();
+            } else {
+                // header("Location: /Dashboard");
+                $GLOBALS['authControllerObj']->errors['general_error'] = "Enter valid details!!";
+                // exit();
+            }
         } else {
-            echo "user not found.";
+            echo "User not found";
         }
     }
 

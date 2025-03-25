@@ -5,7 +5,7 @@ class authController
     public $email;
     public $password;
     public $userModelObject;
-    public $errors = array("email_error" => '', "password_error" => '', "general_error" => '' );
+    public $errors = array("email_error" => '', "password_error" => '', "general_error" => '');
 
     public function __construct()
     {

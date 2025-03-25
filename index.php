@@ -1,5 +1,7 @@
 <?php
 require('./constants.php');
+// include '.Dashboard/controller/authController.php';
+// echo __APPPATH__ . "/controller/authController.php";
 ?>
 
 <!DOCTYPE html>

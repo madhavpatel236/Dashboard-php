@@ -70,9 +70,8 @@ class userModel
                 header("Location: /Dashboard/view/UserHome.php");
                 exit();
             } else {
-                // header("Location: /Dashboard");
                 $GLOBALS['authControllerObj']->errors['general_error'] = "Enter valid details!!";
-                // exit();
+                return false; // return the false.
             }
         } else {
             echo "User not found";

@@ -1,16 +1,20 @@
 <?php
+
 include "../model/userModel.php";
+// var_dump($_POST);
 class authController
 {
     public $email;
     public $password;
     public $userModelObject;
+    public $isUserPresent;
     public $errors = array("email_error" => '', "password_error" => '', "general_error" => '');
 
     public function __construct()
     {
         $obj = new userModel();
         $this->userModelObject = $obj;
+        // var_dump($this->userModelObject);
 
         $this->email = isset($_POST['email']) ? $_POST['email'] : '';
         $this->password = isset($_POST['password']) ? $_POST['password'] : '';
@@ -26,17 +30,35 @@ class authController
 
     public function authUser()
     {
-        $this->userModelObject->authentication($this->email, $this->password);
+        $result = $this->userModelObject->authentication($this->email, $this->password);
+        // if ($result === false) {
+        //     header("Location: /Dashboard");
+        //     exit();
+        // }
     }
+
+    // public function isUser()
+    // {
+    //     return $this->isUserPresent = $this->userModelObject->userPresent($this->email, $this->password);
+    //     var_dump($this->isUserPresent);
+    //     // if ($this->isUserPresent !== true) {
+    //     //     return false;
+    //     // } else {
+    //     //     return true;
+    //     // }
+    // }
 }
 
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $authControllerObj = new authController();
 
+
     if (isset($_POST['submit'])) {
+        // $authControllerObj->isUser();
         $authControllerObj->authUser();
     }
 }
 
 $authControllerObj = new authController();
+// $authControllerObj->isUser();

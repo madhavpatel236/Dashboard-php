@@ -70,14 +70,38 @@ class userModel
                 header("Location: /Dashboard/view/UserHome.php");
                 exit();
             } else {
-                $GLOBALS['authControllerObj']->errors['general_error'] = "Enter valid details!!";
-                return false; // return the false.
+                echo "user not here!!!!!!!!!!!!!!!";
+                header("Location: /Dashboard");
+                exit();
+                // $GLOBALS['authControllerObj']->errors['general_error'] = "Enter valid details!!";
             }
         } else {
-            echo "User not found";
+            // return false;
+            echo "user not here!!!!!!!!!!!!!!!";
+            header("Location: /Dashboard");
+            exit();
         }
     }
 
+    public function userPresent($email, $password)
+    {
+        $getuser = "SELECT * FROM userData WHERE email = '$email' ";
+        $getUserresult = mysqli_query($this->isConnect, $getuser);
+
+        if ($getUserresult->num_rows > 0) {
+            $row = $getUserresult->fetch_assoc();
+            if (password_verify($password, $row['password'])) {
+                // echo "present". $row['id'];
+                return true;
+            } else {
+                // echo "not present". ", " . $email . ", " .$password;
+                // $error= "User is not present";
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
 
     // Insert data in db 
     public function createUser($firstname, $lastname, $email, $password, $role)
@@ -179,5 +203,6 @@ class userModel
 }
 
 $userModelObj = new userModel();
+// $userModelObj->userPresent("madhav@elsner.com", "Madhav123");
 // $userModelObj->updateUserData(7);
 // $userModelObj->createUser( "parth123456", "patel", "parth@gmail.com", "patel@123", "user");

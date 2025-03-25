@@ -1,0 +1,332 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  /* Shared background */
+  body {
+    background: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+    min-height: 100vh;
+  }
+  
+  /* Login page styles */
+  body:has(.form-container) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  .form-container {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 400px;
+    overflow: hidden;
+  }
+  
+  .form-title {
+    background-color: #4a6bdf;
+    color: white;
+    font-size: 24px;
+    padding: 20px 12px;
+    text-align: center;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-bottom: 0;
+  }
+  
+  /* Add User page styles */
+  body:has(.heading-addUser) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  .heading-addUser {
+    background-color: #4a6bdf;
+    color: white;
+    font-size: 24px;
+    padding: 20px ;
+    text-align: center;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-bottom: 20px;
+    width: 100%;
+    /* border-radius: 0     10px 0 0; */
+  }
+  
+  /* Form styling (shared between login and add user) */
+  form {
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+  }
+  
+  /* Add User form specific */
+  body:has(.heading-addUser) form {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 450px;
+    overflow: hidden;
+    padding-top: 0;
+  }
+  
+  .lable {
+    color: #444;
+    margin-bottom: 8px;
+    font-size: 15px;
+    font-weight: 500;
+  }
+  
+  .input {
+    padding: 14px 16px;
+    border: 1px solid #dde2e8;
+    border-radius: 5px;
+    font-size: 15px;
+    margin-bottom: 6px;
+    transition: all 0.3s ease;
+    background-color: #f7f9fc;
+  }
+  
+  .input:focus {
+    outline: none;
+    border-color: #4a6bdf;
+    box-shadow: 0 0 0 3px rgba(74, 107, 223, 0.15);
+    background-color: white;
+  }
+  
+  .error {
+    color: #e73a3a;
+    font-size: 13px;
+    margin-bottom: 18px;
+    min-height: 18px;
+    display: block;
+  }
+  
+  /* Button styling (shared between all pages) */
+  .btn-submit, #submit_btn, button {
+    background-color: #4a6bdf;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    letter-spacing: 0.5px;
+  }
+  
+  .btn-submit:hover, #submit_btn:hover, button:hover {
+    background-color: #3a57c4;
+    box-shadow: 0 5px 15px rgba(74, 107, 223, 0.3);
+  }
+  
+  .btn-submit:active, #submit_btn:active, button:active {
+    transform: translateY(2px);
+    box-shadow: none;
+  }
+  
+  /* Admin dashboard styles */
+  /* For admin page, different body styling */
+  body:has(.heading-adminHome) {
+    padding: 30px;
+    display: block;
+  }
+  
+  .heading-adminHome {
+    background-color: #4a6bdf;
+    color: white;
+    font-size: 24px;
+    padding: 18px 0;
+    text-align: center;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin: 20px 0 30px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Create user button container */
+  div:first-of-type {
+    display: flex;
+    justify-content: flex-end;
+    margin: 20px 0;
+  }
+  
+  button a {
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+    padding: 12px 20px;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+  }
+  
+  /* Table styling */
+  .table {
+    width: 100%;
+    background-color: white;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    margin: 0 auto 30px;
+  }
+  
+  .table-heading {
+    background-color: #4a6bdf;
+    color: white;
+    font-weight: 600;
+    text-align: left;
+    padding: 15px 20px;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+  }
+  
+  .table-body-data {
+    padding: 14px 20px;
+    border-bottom: 1px solid #e9ecef;
+    color: #444;
+    font-size: 14px;
+  }
+  
+  .table-body:nth-child(even) {
+    background-color: #f8fafd;
+  }
+  
+  .table-body:hover {
+    background-color: #f0f4ff;
+  }
+  
+  .table-body:last-child .table-body-data {
+    border-bottom: none;
+  }
+  
+  /* Action buttons */
+  .edit-btn, .delete-btn {
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    color: white;
+    width: 90%;
+    margin: 0 auto;
+    display: block;
+  }
+  
+  .edit-btn {
+    background-color: #36b9cc;
+  }
+  
+  .edit-btn:hover {
+    background-color: #2a9aaa;
+    box-shadow: 0 4px 12px rgba(54, 185, 204, 0.3);
+  }
+  
+  .delete-btn {
+    background-color: #e74a3b;
+  }
+  
+  .delete-btn:hover {
+    background-color: #d33a2c;
+    box-shadow: 0 4px 12px rgba(231, 74, 59, 0.3);
+  }
+  
+  .edit-btn:active, .delete-btn:active {
+    transform: translateY(2px);
+    box-shadow: none;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 1024px) {
+    .table-heading, .table-body-data {
+      padding: 12px 15px;
+      font-size: 13px;
+    }
+    
+    .edit-btn, .delete-btn {
+      padding: 6px 12px;
+      font-size: 12px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    body:has(.heading-adminHome) {
+      padding: 20px 15px;
+    }
+    
+    .table {
+      display: block;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+    
+    .heading-adminHome, .heading-addUser, .form-title {
+      font-size: 20px;
+      padding: 15px 0;
+    }
+    
+    div:first-of-type {
+      justify-content: center;
+      margin: 15px 0;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .form-container, body:has(.heading-addUser) form {
+      max-width: 100%;
+    }
+    
+    .form-title, .heading-adminHome, .heading-addUser {
+      font-size: 20px;
+      padding: 15px 0;
+    }
+    
+    form {
+      padding: 20px;
+    }
+    
+    .input, .btn-submit, #submit_btn {
+      padding: 12px 14px;
+      font-size: 14px;
+    }
+    
+    .lable {
+      font-size: 14px;
+    }
+    
+    body:has(.heading-adminHome) {
+      padding: 15px 10px;
+    }
+    
+    button a {
+      padding: 10px 15px;
+      font-size: 13px;
+    }
+    
+    .table-heading, .table-body-data {
+      padding: 10px 12px;
+      font-size: 12px;
+    }
+    
+    .edit-btn, .delete-btn {
+      padding: 6px 10px;
+      font-size: 11px;
+      width: 100%;
+    }
+  }

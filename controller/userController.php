@@ -56,6 +56,18 @@ class userController
         return $this->userModelObject->edituserData($editUserId);
     }
 
+    public function updateUserDetails($userEditId, $firstname, $lastname, $role)
+    {
+        $isUpdate = $this->userModelObject->updateUserData($userEditId, $firstname, $lastname, $role);
+
+        if ($isUpdate) {
+            header("Location: /Dashboard/view/AdminHome.php ");
+            exit;
+        } else {
+            echo "ERROR: Data was not updated.";
+        }
+    }
+
     public function getAllUserData()
     {
         return $this->userModelObject->getAllUsereData();
@@ -71,6 +83,8 @@ $userControllerObj = new userController();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $userControllerObj = new userController();
+    $userEditId;
+
     if (isset($_POST['submit_btn'])) {
         $userControllerObj->InsertData();
         header("Location: " . "/Dashboard/view/AdminHome.php");
@@ -78,8 +92,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     if (isset($_POST['editUser'])) {
-        $id = $_POST['editUserId'];
-        $data = $userControllerObj->editUserDetails($id);
+        $userEditId = $_POST['editUserId'];
+        // echo $userEditId;
+        $data = $userControllerObj->editUserDetails($userEditId);
+    }
+
+    if (isset($_POST['update_btn'])) {
+        $firstname = $_POST['firstname'];
+        $lastname = $_POST['lastname'];
+        $role = $_POST['role'];
+            // echo $userEditId;
+        $id = $_POST['userUpdateID'];
+        $userControllerObj->updateUserDetails($id, $firstname, $lastname, $role);
     }
 
     if (isset($_POST['deleteUser'])) {

@@ -16,7 +16,7 @@ if ($_SESSION['authenticated'] !== true) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../assets/style.css">
-    <script defer src="../assets/AddUserFormauth.js "></script>
+    <!-- <script defer src="../assets/AddUserFormauth.js "></script> -->
 </head>
 
 <body>
@@ -28,6 +28,11 @@ if ($_SESSION['authenticated'] !== true) {
         <?php if (!$_POST['editUserId']): ?>
             <h2 class="heading-addUser"> Add User </h2>
         <?php endif ?>
+        
+        <?php if ($_POST['editUserId']): ?>
+            <input type="hidden" id="userUpdateID" name='userUpdateID' value=" <?php echo $_POST['editUserId'] ?> " />
+        <?php endif ?>
+
         <lable class="lable" for="firstname"> First name: </lable>
         <input class="input" id="firstname" name="firstname" value="<?php echo $data['firstname'] ?>" />
         <span class="error" name="firstname_error" id="firstname_error"> </span>
@@ -52,10 +57,10 @@ if ($_SESSION['authenticated'] !== true) {
         <span class="role" name="role_error" id="role_error"> </span>
 
         <?php if (!$_POST['editUserId']): ?>
-            <button id="submit_btn" name="submit_btn"> save </button>
+            <button id="submit_btn" name="submit_btn"> Submit </button>
         <?php endif; ?>
         <?php if ($_POST['editUserId']): ?>
-            <button id="submit_btn" name="submit_btn"> Update </button>
+            <button id="update_btn" name="update_btn"> Update </button>
         <?php endif; ?>
     </form>
 </body>

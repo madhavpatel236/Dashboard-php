@@ -47,6 +47,7 @@ class userModel
                 ];
             }
             // var_dump($adminList);
+            return $adminList;
         } else {
             echo " ADMIN not found";
         }
@@ -68,9 +69,9 @@ class userModel
             $_SESSION['authenticated'] = true;
             header("Location: /Dashboard/view/UserHome.php");
             exit();
+        } else{
+            echo "user not found.";
         }
-
-
     }
 
 
@@ -128,6 +129,17 @@ class userModel
         // return $data;
     }
 
+    // update userdata
+    public function updateUserData($userId, $firstname, $lastname, $role)
+    {
+        echo  $userId;
+        $update = " UPDATE userData SET firstName = '$firstname', lastName = '$lastname', role = '$role' WHERE Id = '$userId' ";
+        $updateResult = mysqli_query($this->isConnect, $update);
+
+        echo __LINE__ . var_dump($updateResult);
+        return $updateResult;
+    }
+
     // used in the AdminHomepage
     public function getAllUsereData()
     {
@@ -163,4 +175,5 @@ class userModel
 }
 
 $userModelObj = new userModel();
+// $userModelObj->updateUserData(7);
 // $userModelObj->createUser( "parth123456", "patel", "parth@gmail.com", "patel@123", "user");

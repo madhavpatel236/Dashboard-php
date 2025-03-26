@@ -19,8 +19,8 @@ if ($_SESSION['authenticated'] !== true) {
 
 <body>
     <div>
-        <button>
-            <a href="../view/AddUser.php"> Create User </a>
+        <button name="create_user">
+            <a href="../view/AddUser.php"  > Create User  </a>
         </button>
     </div>
     <h2 class="heading-adminHome"> Admin Page </h2>

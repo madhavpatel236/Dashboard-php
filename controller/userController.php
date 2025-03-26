@@ -1,4 +1,5 @@
 <?php
+session_start();
 include dirname(__DIR__) . "/model/userModel.php";
 
 class userController
@@ -59,11 +60,14 @@ class userController
         $isUpdate = $this->userModelObject->updateUserData($userEditId, $firstname, $lastname, $email, $role);
 
         if ($isUpdate) {
+            $_SESSION['isEdit'] = false;
             header("Location: /Dashboard/view/AdminHome.php ");
             exit;
         } else {
+            $_SESSION['isEdit'] = true;
             header("Location: {$_SERVER['PHP_SELF']} ");
             echo "ERROR: Data was not updated.";
+            exit();
         }
     }
 
@@ -85,12 +89,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $userEditId;
 
     if (isset($_POST['submit_btn'])) {
+        $_SESSION['isEdit'] = false;
         $userControllerObj->InsertData();
         header("Location: " . "/Dashboard/view/AdminHome.php");
         exit;
     }
 
     if (isset($_POST['editUser'])) {
+        $_SESSION['isEdit'] = true;
         $userEditId = $_POST['editUserId'];
         // echo $userEditId;
         $data = $userControllerObj->editUserDetails($userEditId);
@@ -109,6 +115,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $userControllerObj->deleteUserDetails();
         header("Location: " . "/Dashboard/view/AdminHome.php");
         exit;
+    }
+
+    if(isset($_POST['create_user'])){
+        $_SESSION['isEdit'] = false;
     }
 }
 $userControllerObj = new userController();

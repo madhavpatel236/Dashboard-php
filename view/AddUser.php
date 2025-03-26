@@ -1,4 +1,5 @@
 <?php
+// var_dump(($_SESSION['userId']));
 include dirname(__DIR__) . "/controller/userController.php";
 
 if ($_SESSION['authenticated'] !== true) {
@@ -51,10 +52,10 @@ if ($_SESSION['authenticated'] !== true) {
             <input class="input" id="password" name="password" value="<?php echo $data['password'] ?>" />
             <span class="error" name="password_error" id="password_error"> </span>
         <?php endif; ?>
-        
-        <?php if ($_POST['editUserId']): ?>
-            <input type="hidden" class="input" id="password" name="password" value="<?php echo $data['password'] ?>" />
-        <?php endif; ?>
+
+        <?php var_dump($_SESSION['isEdit'] ); ?>
+
+        <input type="hidden" class="input" id="password" name="password" value="<?php echo $data['password'] ?>" />
 
         <lable class="lable" for="role"> Role: </lable>
         <input class="input" id="role" name="role" value="<?php echo $data['role'] ?>" />

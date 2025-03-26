@@ -4,7 +4,7 @@ require('./constants.php');
 $_SESSION['authenticated'];
 $_SESSION['credential_error'];
 $_SESSION['role'];
-$_SESSION['edituserId'];
+$_SESSION['isEdit'];
 
 
 if($_SESSION['authenticated'] == true && $_SESSION['role'] == 'admin'){

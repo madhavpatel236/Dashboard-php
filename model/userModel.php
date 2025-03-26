@@ -85,25 +85,25 @@ class userModel
         }
     }
 
-    public function userPresent($email, $password)
-    {
-        $getuser = "SELECT * FROM userData WHERE email = '$email' ";
-        $getUserresult = mysqli_query($this->isConnect, $getuser);
+    // public function userPresent($email, $password)
+    // {
+    //     $getuser = "SELECT * FROM userData WHERE email = '$email' ";
+    //     $getUserresult = mysqli_query($this->isConnect, $getuser);
 
-        if ($getUserresult->num_rows > 0) {
-            $row = $getUserresult->fetch_assoc();
-            if (password_verify($password, $row['password'])) {
-                // echo "present". $row['id'];
-                return true;
-            } else {
-                // echo "not present". ", " . $email . ", " .$password;
-                // $error= "User is not present";
-                return false;
-            }
-        } else {
-            return false;
-        }
-    }
+    //     if ($getUserresult->num_rows > 0) {
+    //         $row = $getUserresult->fetch_assoc();
+    //         if (password_verify($password, $row['password'])) {
+    //             // echo "present". $row['id'];
+    //             return true;
+    //         } else {
+    //             // echo "not present". ", " . $email . ", " .$password;
+    //             // $error= "User is not present";
+    //             return false;
+    //         }
+    //     } else {
+    //         return false;
+    //     }
+    // }
 
     // Insert data in db 
     public function createUser($firstname, $lastname, $email, $password, $role)
@@ -155,7 +155,6 @@ class userModel
                 ];
             }
         }
-        $_SESSION['edituserId'] = $userId;
         return $userData;
         // return $data;
     }
@@ -164,10 +163,8 @@ class userModel
     public function updateUserData($userId, $firstname, $lastname, $email, $role)
     {
         // echo  $userId;
-        $_SESSION['edituserId'] = $userId;
         $update = " UPDATE userData SET firstName = '$firstname', lastName = '$lastname', email = '$email', role = '$role' WHERE Id = '$userId' ";
         $updateResult = mysqli_query($this->isConnect, $update);
-
         return $updateResult;
     }
 

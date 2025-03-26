@@ -57,6 +57,7 @@ class userModel
             if ($admin['email'] === $email && $varifyPassword) {
                 $_SESSION['authenticated'] = true;
                 $_SESSION['credential_error'] = false;
+                $_SESSION['role'] = 'admin';
                 header("Location: /Dashboard/view/AdminHome.php");
                 exit();
             }
@@ -69,6 +70,7 @@ class userModel
             if (password_verify($password, $user['password'])) {
                 $_SESSION['authenticated'] = true;
                 $_SESSION['credential_error'] = false;
+                $_SESSION['role'] = 'user';
                 header("Location: /Dashboard/view/UserHome.php");
                 exit();
             } else {
@@ -123,7 +125,7 @@ class userModel
         if ($this->isConnect->query($table)) {
             echo "<script> console.log('Table was created sucessfully!!!');  </script>";
         } else {
-            echo __LINE__ .  $this->isConnect->error;
+            // echo __LINE__ .  $this->isConnect->error;
         }
 
         // Insert :
@@ -131,7 +133,7 @@ class userModel
         if ($this->isConnect->query($insertData)) {
             echo "<script> console.log('data added sucessfully!!!');  </script>";
         } else {
-            echo __LINE__ .  $this->isConnect->error;
+            // echo __LINE__ .  $this->isConnect->error;
         }
     }
 
@@ -153,6 +155,7 @@ class userModel
                 ];
             }
         }
+        $_SESSION['edituserId'] = $userId;
         return $userData;
         // return $data;
     }
@@ -160,11 +163,11 @@ class userModel
     // update userdata
     public function updateUserData($userId, $firstname, $lastname, $email, $role)
     {
-        echo  $userId;
+        // echo  $userId;
+        $_SESSION['edituserId'] = $userId;
         $update = " UPDATE userData SET firstName = '$firstname', lastName = '$lastname', email = '$email', role = '$role' WHERE Id = '$userId' ";
         $updateResult = mysqli_query($this->isConnect, $update);
 
-        echo __LINE__ . var_dump($updateResult);
         return $updateResult;
     }
 

@@ -62,6 +62,7 @@ class userController
             header("Location: /Dashboard/view/AdminHome.php ");
             exit;
         } else {
+            header("Location: {$_SERVER['PHP_SELF']} ");
             echo "ERROR: Data was not updated.";
         }
     }

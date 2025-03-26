@@ -1,7 +1,20 @@
 <?php
+session_start();
 require('./constants.php');
-// include(__APPPATH__. "/controller/authController.php");
-// include __DIR__ . '/controller/authController.php';
+$_SESSION['authenticated'];
+$_SESSION['credential_error'];
+$_SESSION['role'];
+$_SESSION['edituserId'];
+
+
+if($_SESSION['authenticated'] == true && $_SESSION['role'] == 'admin'){
+    header('Location: ./view/AdminHome.php');
+    exit(); 
+} elseif( $_SESSION['authenticated'] == true && $_SESSION['role'] == 'user'){
+    header("Location: ./view/UserHome.php");
+    exit();
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -31,11 +44,10 @@ require('./constants.php');
                 <span class="error" id="general_error"> <?php
                                                         if ($_SESSION['credential_error'] !== false) {
                                                             echo "Please enter valid Credentials.";
-                                                            unset($_SESSION['credential_error']);
+                                                            // unset($_SESSION['credential_error']);
                                                         } else {
                                                             echo "";
                                                         } ?> </span>
-
                 <button class="btn-submit" name="submit">Submit</button>
             </form>
         </div>

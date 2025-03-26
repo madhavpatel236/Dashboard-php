@@ -144,7 +144,6 @@ class userModel
         
         if ($userResult->num_rows > 0) {
             while ($row = $userResult->fetch_assoc()) {
-                // var_dump($row);
                 $userData = [
                     'firstname' => $row['firstName'],
                     'lastname' => $row['lastName'],
@@ -155,7 +154,6 @@ class userModel
             }
         }
         return $userData;
-        // return $data;
     }
 
     // update userdata

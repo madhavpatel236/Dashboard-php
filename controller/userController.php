@@ -65,9 +65,9 @@ class userController
             exit;
         } else {
             $_SESSION['isEdit'] = true;
-            header("Location: {$_SERVER['PHP_SELF']} ");
-            echo "ERROR: Data was not updated.";
-            exit();
+            // header("Location: {$_SERVER['PHP_SELF']} ");
+            // return "ERROR: Data was not updated.";
+            // exit;
         }
     }
 
@@ -98,7 +98,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['editUser'])) {
         $_SESSION['isEdit'] = true;
         $userEditId = $_POST['editUserId'];
-        // echo $userEditId;
         $data = $userControllerObj->editUserDetails($userEditId);
     }
 

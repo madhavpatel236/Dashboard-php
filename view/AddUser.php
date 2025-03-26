@@ -23,14 +23,14 @@ if ($_SESSION['authenticated'] !== true) {
 <body>
 
     <form id="addUserForm" name="addUserForm" method="post">
-        <?php if ($_POST['editUserId']): ?>
+        <?php if ($_SESSION['isEdit']): ?>
             <h2 class="heading-addUser"> Edit User </h2>
         <?php endif; ?>
-        <?php if (!$_POST['editUserId']): ?>
+        <?php if (!$_SESSION['isEdit']): ?>
             <h2 class="heading-addUser"> Add User </h2>
         <?php endif ?>
 
-        <?php if ($_POST['editUserId']): ?>
+        <?php if ($_SESSION['isEdit']): ?>
             <input type="hidden" id="userUpdateID" name='userUpdateID' value=" <?php echo $_POST['editUserId'] ?> " />
         <?php endif ?>
 
@@ -47,24 +47,22 @@ if ($_SESSION['authenticated'] !== true) {
         <input class="input" id="email" name="email" value="<?php echo $data['email'] ?>" />
         <span class="error" name="email_error" id="email_error"> </span>
 
-        <?php if (!$_POST['editUserId']): ?>
+        <?php if (!$_SESSION['isEdit']): ?>
             <lable class="lable" for="password"> Password: </lable>
             <input class="input" id="password" name="password" value="<?php echo $data['password'] ?>" />
             <span class="error" name="password_error" id="password_error"> </span>
         <?php endif; ?>
 
-        <?php var_dump($_SESSION['isEdit'] ); ?>
-
         <input type="hidden" class="input" id="password" name="password" value="<?php echo $data['password'] ?>" />
 
         <lable class="lable" for="role"> Role: </lable>
-        <input class="input" id="role" name="role" value="<?php echo $data['role'] ?>" />
+        <input class="input" id="roles" name="role" value="<?php echo $data['role'] ?>" />
         <span class="role" name="role_error" id="role_error"> </span>
 
-        <?php if (!$_POST['editUserId']): ?>
+        <?php if (!$_SESSION['isEdit']): ?>
             <button id="submit_btn" name="submit_btn"> Submit </button>
         <?php endif; ?>
-        <?php if ($_POST['editUserId']): ?>
+        <?php if ($_SESSION['isEdit']): ?>
             <button id="update_btn" name="update_btn"> Update </button>
         <?php endif; ?>
     </form>

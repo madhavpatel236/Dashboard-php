@@ -4,7 +4,7 @@ document.getElementById("addUserForm").addEventListener("submit", function (e) {
   const lastname = document.getElementById("lastname");
   const email = document.getElementById("email");
   const password = document.getElementById("password");
-  const role = document.getElementById("role");
+  const role = document.getElementById("roles");
 
   const firstname_error = document.getElementById("firstname_error");
   const lastname_error = document.getElementById("lastname_error");

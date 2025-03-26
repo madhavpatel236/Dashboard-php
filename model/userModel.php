@@ -141,11 +141,10 @@ class userModel
     {
         $user = " SELECT * FROM userData WHERE Id = '$userId' ";
         $userResult = mysqli_query($this->isConnect, $user);
-
-        $userData = [];
-
+        
         if ($userResult->num_rows > 0) {
             while ($row = $userResult->fetch_assoc()) {
+                // var_dump($row);
                 $userData = [
                     'firstname' => $row['firstName'],
                     'lastname' => $row['lastName'],
@@ -165,6 +164,11 @@ class userModel
         // echo  $userId;
         $update = " UPDATE userData SET firstName = '$firstname', lastName = '$lastname', email = '$email', role = '$role' WHERE Id = '$userId' ";
         $updateResult = mysqli_query($this->isConnect, $update);
+        if($updateResult){
+            $_SESSION['isEdit'] = false;
+        } else {
+            $_SESSION['isEdit'] = true;
+        }
         return $updateResult;
     }
 

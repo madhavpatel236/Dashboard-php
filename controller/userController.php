@@ -52,7 +52,7 @@ class userController
 
     public function  editUserDetails($editUserId)
     {
-        return $this->userModelObject->edituserData($editUserId);
+        return  $this->userModelObject->edituserData($editUserId);
     }
 
     public function updateUserDetails($userEditId, $firstname, $lastname, $email, $role)
@@ -89,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $userEditId;
 
     if (isset($_POST['submit_btn'])) {
-        $_SESSION['isEdit'] = false;
+        // $_SESSION['isEdit'] = false;
         $userControllerObj->InsertData();
         header("Location: " . "/Dashboard/view/AdminHome.php");
         exit;
@@ -108,6 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $email = $_POST['email'];
         $role = $_POST['role'];
         $id = $_POST['userUpdateID'];
+        // $_SESSION['isEdit'] = false;
         $userControllerObj->updateUserDetails($id, $firstname, $lastname, $email, $role);
     }
 
@@ -117,8 +118,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit;
     }
 
-    if(isset($_POST['create_user'])){
+    if (isset($_POST['create_user'])) {
         $_SESSION['isEdit'] = false;
+        // header('Location: /Dashboard/view/AddUser.php');
+        // exit();
     }
 }
 $userControllerObj = new userController();

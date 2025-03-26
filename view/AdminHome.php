@@ -19,9 +19,12 @@ if ($_SESSION['authenticated'] !== true) {
 
 <body>
     <div>
-        <button name="create_user">
-            <a href="../view/AddUser.php"  > Create User  </a>
-        </button>
+        <form action='../view/AddUser.php'>
+            <button type="submit" name="create_user">
+                Create User
+            </button>
+
+        </form>
     </div>
     <h2 class="heading-adminHome"> Admin Page </h2>
     <table class="table" border="1">

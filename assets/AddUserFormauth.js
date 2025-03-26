@@ -4,11 +4,13 @@ document.getElementById("addUserForm").addEventListener("submit", function (e) {
   const lastname = document.getElementById("lastname");
   const email = document.getElementById("email");
   const password = document.getElementById("password");
+  const role = document.getElementById("role");
 
   const firstname_error = document.getElementById("firstname_error");
   const lastname_error = document.getElementById("lastname_error");
   const email_error = document.getElementById("email_error");
   const password_error = document.getElementById("password_error");
+  const role_error = document.getElementById("role_error");
 
   let isValid = true;
 
@@ -32,6 +34,11 @@ document.getElementById("addUserForm").addEventListener("submit", function (e) {
 
   if (password.value.trim() === "") {
     password_error.textContent = "Password is required";
+    isValid = false;
+  }
+
+  if (role.value.trim() === "") {
+    role_error.textContent = "role is required";
     isValid = false;
   }
 
@@ -67,70 +74,9 @@ document.getElementById("addUserForm").addEventListener("submit", function (e) {
       password_error.textContent = "";
     }
   });
+  role.addEventListener("input", function () {
+    if (role.value.trim() !== "") {
+      role_error.textContent = "";
+    }
+  });
 });
-
-// $(document).ready(function () {
-//   function validateFirstname() {
-//     firstname = $("#firstname").val().trim();
-//     if (firstname === "") {
-//       $("#firstname_error").text("please enter your first name.");
-//       return false;
-//     } else {
-//       $("#firstname_error").text(" ");
-//       return true;
-//     }
-//   }
-
-//   function validateLastname() {
-//     lastname = $("#lastname").val().trim();
-//     if (lastname === "") {
-//       $("#lastname_error").text(" Please enter your lastname.");
-//       return false;
-//     } else {
-//       $("$lastname_error").text(" ");
-//       return true;
-//     }
-//   }
-
-//   function validateEmail() {
-//     email = $("#email").val().trim();
-//     if (email === "") {
-//       $("#email_error").text("Enter your email address");
-//       return false;
-//     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-//       $("#email_error").text("*Please enter a valid email address.");
-//       $("#email").css({ "border-color": "red" });
-//       return false;
-//     } else {
-//       $("#email_error").text(" ");
-//       return true;
-//     }
-//   }
-//   function validatePassword() {
-//     password = $("#password").val().trim();
-//     if (password === "") {
-//       $("#password_error").text(" Please enter your passsword.");
-//       return false;
-//     } else {
-//       $("#password_error").text(" ");
-//       return true;
-//     }
-//   }
-
-//   $("#firstname").on("input", validateFirstname);
-//   $("#lastname").on("input", validateLastname);
-//   $("#email").on("input", validateEmail);
-//   $("#password").on("input", validatePassword);
-
-//   $("#addUserForm").submit(function (e) {
-//     let isValid =
-//       validateFirstname() &&
-//       validateLastname() &&
-//       validateEmail() &&
-//       validatePassword();
-
-//     if (!isValid) {
-//       e.preventDefault();
-//     }
-//   });
-// });

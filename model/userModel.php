@@ -56,6 +56,7 @@ class userModel
             // var_dump($varifyPassword);
             if ($admin['email'] === $email && $varifyPassword) {
                 $_SESSION['authenticated'] = true;
+                $_SESSION['credential_error'] = false;
                 header("Location: /Dashboard/view/AdminHome.php");
                 exit();
             }
@@ -67,17 +68,16 @@ class userModel
             $user = mysqli_fetch_assoc($userCheckResult);
             if (password_verify($password, $user['password'])) {
                 $_SESSION['authenticated'] = true;
+                $_SESSION['credential_error'] = false;
                 header("Location: /Dashboard/view/UserHome.php");
                 exit();
             } else {
-                echo "user not here!!!!!!!!!!!!!!!";
+                $_SESSION['credential_error'] = true;
                 header("Location: /Dashboard");
                 exit();
-                // $GLOBALS['authControllerObj']->errors['general_error'] = "Enter valid details!!";
             }
         } else {
-            // return false;
-            echo "user not here!!!!!!!!!!!!!!!";
+            $_SESSION['credential_error'] = true;
             header("Location: /Dashboard");
             exit();
         }
@@ -158,10 +158,10 @@ class userModel
     }
 
     // update userdata
-    public function updateUserData($userId, $firstname, $lastname, $role)
+    public function updateUserData($userId, $firstname, $lastname, $email, $role)
     {
         echo  $userId;
-        $update = " UPDATE userData SET firstName = '$firstname', lastName = '$lastname', role = '$role' WHERE Id = '$userId' ";
+        $update = " UPDATE userData SET firstName = '$firstname', lastName = '$lastname', email = '$email', role = '$role' WHERE Id = '$userId' ";
         $updateResult = mysqli_query($this->isConnect, $update);
 
         echo __LINE__ . var_dump($updateResult);

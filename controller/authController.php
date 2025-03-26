@@ -30,23 +30,8 @@ class authController
 
     public function authUser()
     {
-        $result = $this->userModelObject->authentication($this->email, $this->password);
-        // if ($result === false) {
-        //     header("Location: /Dashboard");
-        //     exit();
-        // }
+        $this->userModelObject->authentication($this->email, $this->password);
     }
-
-    // public function isUser()
-    // {
-    //     return $this->isUserPresent = $this->userModelObject->userPresent($this->email, $this->password);
-    //     var_dump($this->isUserPresent);
-    //     // if ($this->isUserPresent !== true) {
-    //     //     return false;
-    //     // } else {
-    //     //     return true;
-    //     // }
-    // }
 }
 
 
@@ -55,10 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 
     if (isset($_POST['submit'])) {
-        // $authControllerObj->isUser();
         $authControllerObj->authUser();
     }
 }
 
-$authControllerObj = new authController();
-// $authControllerObj->isUser();

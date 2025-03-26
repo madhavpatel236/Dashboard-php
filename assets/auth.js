@@ -8,7 +8,7 @@ document.getElementById("loginForm").addEventListener("submit", function (e) {
   let isValid = true;
 
   clearErrors();
-
+  
   if (email.value.trim() === "") {
     emailError.textContent = "Email is required";
     isValid = false;

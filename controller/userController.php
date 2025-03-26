@@ -9,7 +9,6 @@ class userController
     public $password = '';
     public $role;
     public $userModelObject;
-    public $authControllerObject = '';
     public $userId = '';
     public $editUserId;
     public $errors = array("firstname_error" => "", "lastname_error" => "", "email_error" => "", "password_error" => "",);
@@ -24,7 +23,6 @@ class userController
         $this->role = isset($_POST['role']) ? $_POST['role'] : "";
         $this->userId = isset($_POST['deleteUser']) ? $_POST['userId'] : "";
         $this->editUserId = $_POST['editUserId'];
-        // var_dump($this->authControllerObject);
 
         // validation
         if (empty($this->firstname)) {
@@ -56,9 +54,9 @@ class userController
         return $this->userModelObject->edituserData($editUserId);
     }
 
-    public function updateUserDetails($userEditId, $firstname, $lastname, $role)
+    public function updateUserDetails($userEditId, $firstname, $lastname, $email, $role)
     {
-        $isUpdate = $this->userModelObject->updateUserData($userEditId, $firstname, $lastname, $role);
+        $isUpdate = $this->userModelObject->updateUserData($userEditId, $firstname, $lastname, $email, $role);
 
         if ($isUpdate) {
             header("Location: /Dashboard/view/AdminHome.php ");
@@ -100,10 +98,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['update_btn'])) {
         $firstname = $_POST['firstname'];
         $lastname = $_POST['lastname'];
+        $email = $_POST['email'];
         $role = $_POST['role'];
-            // echo $userEditId;
         $id = $_POST['userUpdateID'];
-        $userControllerObj->updateUserDetails($id, $firstname, $lastname, $role);
+        $userControllerObj->updateUserDetails($id, $firstname, $lastname, $email, $role);
     }
 
     if (isset($_POST['deleteUser'])) {

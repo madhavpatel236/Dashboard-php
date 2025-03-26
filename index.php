@@ -28,7 +28,13 @@ require('./constants.php');
                 <label class="lable" for="password">Password:</label>
                 <input class="input" id="password" name="password" type="password" />
                 <span class="error" id="password_error"></span>
-                <span class="error" id="general_error"> <?php echo $errors['general_error'] ?> </span>
+                <span class="error" id="general_error"> <?php
+                                                        if ($_SESSION['credential_error'] !== false) {
+                                                            echo "Please enter valid Credentials.";
+                                                            unset($_SESSION['credential_error']);
+                                                        } else {
+                                                            echo "";
+                                                        } ?> </span>
 
                 <button class="btn-submit" name="submit">Submit</button>
             </form>

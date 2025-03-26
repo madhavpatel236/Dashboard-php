@@ -108,7 +108,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $email = $_POST['email'];
         $role = $_POST['role'];
         $id = $_POST['userUpdateID'];
-        // $_SESSION['isEdit'] = false;
         $userControllerObj->updateUserDetails($id, $firstname, $lastname, $email, $role);
     }
 

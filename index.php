@@ -44,7 +44,7 @@ if($_SESSION['authenticated'] == true && $_SESSION['role'] == 'admin'){
                 <span class="error" id="general_error"> <?php
                                                         if ($_SESSION['credential_error'] !== false) {
                                                             echo "Please enter valid Credentials.";
-                                                            // unset($_SESSION['credential_error']);
+                                                            unset($_SESSION['credential_error']);
                                                         } else {
                                                             echo "";
                                                         } ?> </span>

@@ -16,7 +16,7 @@ if ($_SESSION['authenticated'] !== true) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../assets/style.css">
-    <!-- <script defer src="../assets/AddUserFormauth.js "></script> -->
+    <script defer src="../assets/AddUserFormauth.js "></script>
 </head>
 
 <body>

@@ -22,10 +22,10 @@ if ($_SESSION['authenticated'] !== true) {
     <div>
         <h1>Hello USER</h1>
         <div>
-        First Name: <span> <?php echo($authControllerObj->getUser()[0]['firstname'] ) ?> </span> <br/><br/>
-        Last Name: <span> <?php echo($authControllerObj->getUser()[0]['lastname'] ) ?> </span> <br/><br/>
-        Email: <span> <?php echo($authControllerObj->getUser()[0]['email'] ) ?> </span> <br/><br/>
-        role: <span> <?php echo($authControllerObj->getUser()[0]['role'] ) ?> </span> <br/><br/>
+            First Name: <span> <?php echo ($authControllerObj->getUser()[0]['firstname']) ?> </span> <br /><br />
+            Last Name: <span> <?php echo ($authControllerObj->getUser()[0]['lastname']) ?> </span> <br /><br />
+            Email: <span> <?php echo ($authControllerObj->getUser()[0]['email']) ?> </span> <br /><br />
+            role: <span> <?php echo ($authControllerObj->getUser()[0]['role']) ?> </span> <br /><br />
         </div>
     </div>
 </body>

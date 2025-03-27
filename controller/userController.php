@@ -89,7 +89,6 @@ class userController
             header("Location: /Dashboard/view/AdminHome.php ");
             exit;
         } else {
-            $_SESSION['isEdit'] = true;
             // header("Location: {$_SERVER['PHP_SELF']} ");
             // return "ERROR: Data was not updated.";
             // exit;
@@ -105,7 +104,6 @@ class userController
     {
         $this->userModelObject->deleteIndividualUser($this->userId);
     }
-
 }
 
 $userControllerObj = new userController();
@@ -116,7 +114,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
     if (isset($_POST['submit_btn'])) {
-        // $_SESSION['isEdit'] = false;
+        $_SESSION['isEdit'] = false;
         $userControllerObj->InsertData();
         header("Location: " . "/Dashboard/view/AdminHome.php");
         exit;
@@ -144,9 +142,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     if (isset($_POST['create_user'])) {
+        // var_dump("dcc");
         $_SESSION['isEdit'] = false;
-        // header('Location: /Dashboard/view/AddUser.php');
-        // exit();
     }
 }
 $userControllerObj = new userController();

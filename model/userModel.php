@@ -173,7 +173,7 @@ class userModel
         if ($updateResult) {
             $_SESSION['isEdit'] = false;
         } else {
-            $_SESSION['isEdit'] = true;
+            // $_SESSION['isEdit'] = true;
         }
         return $updateResult;
     }

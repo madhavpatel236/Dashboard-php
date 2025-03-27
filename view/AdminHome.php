@@ -27,40 +27,45 @@ if ($_SESSION['authenticated'] !== true) {
         </form>
     </div>
     <h2 class="heading-adminHome"> Admin Page </h2>
-    <table class="table" border="1">
-        <td class="table-heading">ID</td>
-        <td class="table-heading">First Name</td>
-        <td class="table-heading">Last Name</td>
-        <td class="table-heading">Email</td>
-        <td class="table-heading">Roles</td>
-        <td class="table-heading"></td>
-        <td class="table-heading"></td>
+    <?php if (count($userControllerObj->getAllUserData()) !== 0): ?>
+        <table class="table" border="1">
+            <td class="table-heading">ID</td>
+            <td class="table-heading">First Name</td>
+            <td class="table-heading">Last Name</td>
+            <td class="table-heading">Email</td>
+            <td class="table-heading">Roles</td>
+            <td class="table-heading"></td>
+            <td class="table-heading"></td>
 
-        <?php foreach ($userControllerObj->getAllUserData() as $eachUser): ?>
-            <?php if ($eachUser['role'] !== "admin"): ?>
-                <tr class="table-body">
-                    <td class="table-body-data"><?php echo htmlspecialchars($eachUser['Id']); ?></td>
-                    <td class="table-body-data"><?php echo htmlspecialchars($eachUser['firstName']); ?></td>
-                    <td class="table-body-data"><?php echo htmlspecialchars($eachUser['lastName']); ?></td>
-                    <td class="table-body-data"><?php echo htmlspecialchars($eachUser['email']); ?></td>
-                    <td class="table-body-data"><?php echo htmlspecialchars($eachUser['role']); ?></td>
-                    <td class="table-body-data">
-                        <form action="./AddUser.php" method="POST">
-                            <input type="hidden" name="editUserId" value="<?php echo htmlspecialchars($eachUser['Id']); ?>">
-                            <button type="submit" name="editUser" class="edit-btn"> Edit </button>
-                        </form>
-                    </td>
-                    <td class="table-body-data">
-                        <form action="../controller/userController.php" method="POST">
-                            <input type="hidden" name="userId" value="<?php echo htmlspecialchars($eachUser['Id']); ?>">
-                            <button type="submit" name="deleteUser" class="delete-btn"> Delete </button>
-                        </form>
-                    </td>
-                </tr>
-            <?php endif; ?>
-        <?php endforeach; ?>
+            <?php foreach ($userControllerObj->getAllUserData() as $eachUser): ?>
+                <?php if ($eachUser['role'] !== "admin"): ?>
+                    <tr class="table-body">
+                        <td class="table-body-data"><?php echo htmlspecialchars($eachUser['Id']); ?></td>
+                        <td class="table-body-data"><?php echo htmlspecialchars($eachUser['firstName']); ?></td>
+                        <td class="table-body-data"><?php echo htmlspecialchars($eachUser['lastName']); ?></td>
+                        <td class="table-body-data"><?php echo htmlspecialchars($eachUser['email']); ?></td>
+                        <td class="table-body-data"><?php echo htmlspecialchars($eachUser['role']); ?></td>
+                        <td class="table-body-data">
+                            <form action="./AddUser.php" method="POST">
+                                <input type="hidden" name="editUserId" value="<?php echo htmlspecialchars($eachUser['Id']); ?>">
+                                <button type="submit" name="editUser" class="edit-btn"> Edit </button>
+                            </form>
+                        </td>
+                        <td class="table-body-data">
+                            <form action="../controller/userController.php" method="POST">
+                                <input type="hidden" name="userId" value="<?php echo htmlspecialchars($eachUser['Id']); ?>">
+                                <button type="submit" name="deleteUser" class="delete-btn"> Delete </button>
+                            </form>
+                        </td>
+                    </tr>
+                <?php endif; ?>
+            <?php endforeach; ?>
 
-    </table>
+        </table>
+    <?php endif; ?>
+    <?php if (count($userControllerObj->getAllUserData()) == 0): ?>
+        <h3> No User are there </h3>
+    <?php endif; ?>
 </body>
 
 </html>

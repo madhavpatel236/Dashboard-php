@@ -129,7 +129,7 @@ class userModel
         $ID = $_SESSION['userId'];
         $userData = "SELECT * FROM userData WHERE Id = '$ID' ";
         $userDataResult = mysqli_query($this->isConnect, $userData);
-        
+
         $userDetails = [];
         if ($userDataResult->num_rows > 0) {
             while ($row = $userDataResult->fetch_assoc()) {
@@ -181,7 +181,7 @@ class userModel
     // used in the AdminHomepage
     public function getAllUsereData()
     {
-        $userData = " SELECT * FROM userData WHERE Id > 1";
+        $userData = " SELECT * FROM userData WHERE role = 'user' ";
         $userDataResult = mysqli_query($this->isConnect, $userData);
 
         if ($userDataResult->num_rows > 0) {
@@ -196,7 +196,10 @@ class userModel
                 ];
             }
         }
-        return $userDetails;
+        // var_dump($userDetails);  
+       
+            return $userDetails;
+    
     }
 
     public function deleteIndividualUser($userId)

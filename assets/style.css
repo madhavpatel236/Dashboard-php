@@ -159,7 +159,7 @@
   /* Create user button container */
   div:first-of-type {
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
     margin: 20px 0;
   }
   
@@ -330,3 +330,7 @@
       width: 100%;
     }
   }
+
+
+
+  

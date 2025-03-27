@@ -111,15 +111,17 @@ class userModel
         if ($this->isConnect->query($table)) {
             echo "<script> console.log('Table was created sucessfully!!!');  </script>";
         } else {
-            echo __LINE__ .  $this->isConnect->error;
+            // echo __LINE__ .  $this->isConnect->error;
         }
 
         // Insert :
         $insertData = "INSERT INTO userData(firstName, lastName, email, password, role) VALUES ( '$firstname' , '$lastname' , '$email', '$hashPassword', '$userRole')";
-        if ($this->isConnect->query($insertData)) {
+        $insertDataResult = $this->isConnect->query($insertData);
+        if ($insertDataResult) {
             echo "<script> console.log('data added sucessfully!!!');  </script>";
         } else {
-            echo __LINE__ .  $this->isConnect->error;
+
+            // echo __LINE__ .  $this->isConnect->error;
         }
     }
 
@@ -197,9 +199,8 @@ class userModel
             }
         }
         // var_dump($userDetails);  
-       
-            return $userDetails;
-    
+
+        return $userDetails;
     }
 
     public function deleteIndividualUser($userId)

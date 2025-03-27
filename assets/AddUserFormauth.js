@@ -19,16 +19,21 @@ document.getElementById("addUserForm").addEventListener("submit", function (e) {
     isValid = false;
   }
 
-  // const regex =
-  //   "^(?=.*SELECT.*FROM)(?!.*(?:CREATE|DROP|UPDATE|INSERT|ALTER|DELETE|ATTACH|DETACH)).*$";
-  // firstname_error.innerText = regex.test(firstname.value);
-
-  // if("^(?=.*SELECT.*FROM)(?!.*(?:CREATE|DROP|UPDATE|INSERT|ALTER|DELETE|ATTACH|DETACH)).*$".test(firstname.value.trim())) {
-  //   firstname_error.textContent = "Please enter valid firstname.";
-  //   isValid = false;
-  // }
+  if (length(firstname.value) >= 12) {
+    firstname_error.textContent = "firstname is not more then 10 char";
+    isValid = false;
+  }
 
   if (lastname.value.trim() == "") {
+    // const regex =
+    //   "^(?=.*SELECT.*FROM)(?!.*(?:CREATE|DROP|UPDATE|INSERT|ALTER|DELETE|ATTACH|DETACH)).*$";
+    // firstname_error.innerText = regex.test(firstname.value);
+
+    // if("^(?=.*SELECT.*FROM)(?!.*(?:CREATE|DROP|UPDATE|INSERT|ALTER|DELETE|ATTACH|DETACH)).*$".test(firstname.value.trim())) {
+    //   firstname_error.textContent = "Please enter valid firstname.";
+    //   isValid = false;
+    // }
+
     lastname_error.textContent = "lastname is required";
     isValid = false;
   }
@@ -37,7 +42,7 @@ document.getElementById("addUserForm").addEventListener("submit", function (e) {
     email_error.textContent = "Email is required";
     isValid = false;
   } else if (!isValidEmail(email.value)) {
-    email_error.textContent = "Please enter a valid email address";
+    email_error.textContent = "Please enter a valid email address!!";
     isValid = false;
   }
 
@@ -90,10 +95,11 @@ document.getElementById("addUserForm").addEventListener("submit", function (e) {
   });
 });
 
-// function show() {
-  // document
-  //   .getElementById("password_show")
-  //   .addEventListener("click", function () {
-  //     document.getElementById("password_show").innerText = "hello";
-  //   });
-// }
+function togglePassword() {
+  var passwordField = document.getElementById("password");
+  if (passwordField.type === "password") {
+    passwordField.type = "text";
+  } else {
+    passwordField.type = "password";
+  }
+}

@@ -17,58 +17,74 @@ class userController
     public function __construct()
     {
         $this->userModelObject = $GLOBALS['userModelObj'];
-        $this->firstname = isset($_POST['firstname']) ? $_POST['firstname'] : '';
-        $this->lastname = isset($_POST['lastname']) ? $_POST['lastname'] : "";
-        $this->email = isset($_POST['email']) ? $_POST['email'] : "";
-        $this->password = isset($_POST['password']) ? $_POST['password'] : "";
-        $this->role = isset($_POST['role']) ? $_POST['role'] : "";
+        $this->firstname = isset($_POST['firstname']) ? trim($_POST['firstname']) : '';
+        $this->lastname = isset($_POST['lastname']) ? trim($_POST['lastname']) : "";
+        $this->email = isset($_POST['email']) ? trim($_POST['email']) : "";
+        $this->password = isset($_POST['password']) ? trim($_POST['password']) : "";
+        $this->role = isset($_POST['role']) ? trim($_POST['role']) : "";
         $this->userId = isset($_POST['deleteUser']) ? $_POST['userId'] : "";
         $this->editUserId = $_POST['editUserId'];
 
-        // var_dump(preg_match_all("^(?=.*SELECT.*FROM)(?!.*(?:CREATE|DROP|UPDATE|INSERT|ALTER|DELETE|ATTACH|DETACH)).*$", $this->firstname));
 
         // validation
-        if (empty($this->firstname)) {
-            $this->errors['firstname_error'] = "Please enter the firstname.";
-        }
-        if (preg_match("/\b(select|insert|update|delete|drop|truncate|alter|union|create|exec|--|#|;)\b/i", $this->firstname)) {
-            $this->errors['firstname_error'] = "Please enter a valid first name";
-        }
+        if (isset($_POST['submit_btn']) || isset($_POST['update_btn'])) {
+            if (empty($this->firstname)) {
+                $this->errors['firstname_error'] = "Please enter the firstname.";
+            }
 
-        if (empty($this->lastname)) {
-            $this->errors['lastname_error'] = "Please enter the lastname.";
-        }
-        if (preg_match("/\b(select|insert|update|delete|drop|truncate|alter|union|create|exec|--|#|;)\b/i", $this->lastname)) {
-            $this->errors['lastname_error'] = "Please enter a valid last name";
-        }
+            if (strlen(trim($this->firstname)) >= 12) {
+                $this->errors['firstname_error'] = "More then 12 char is not allowed in the firstname.";
+            }
 
-        if (empty($this->email)) {
-            $this->errors['email_error'] = "Please enter the  email address.";
-        }
+            if (preg_match("/\b(select|insert|update|delete|drop|truncate|alter|union|create|exec|--|#|;)\b/i", $this->firstname)) {
+                $this->errors['firstname_error'] = "Please enter a valid first name";
+            }
 
-        if (filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
-            $this->errors['email_error'] = "Please enter the valid email address.";
-        }
+            if (empty($this->lastname)) {
+                $this->errors['lastname_error'] = "Please enter the lastname.";
+            }
+            if (preg_match("/\b(select|insert|update|delete|drop|truncate|alter|union|create|exec|--|#|;)\b/i", $this->lastname)) {
+                $this->errors['lastname_error'] = "Please enter a valid last name";
+            }
 
-        if (empty($this->password)) {
-            $this->errors['password_error'] = "Please enter the  password.";
-        }
-        if (preg_match("/\b(select|insert|update|delete|drop|truncate|alter|union|create|exec|--|#|;)\b/i", $this->password)) {
-            $this->errors['password_error'] = "Please enter a valid password";
-        }
+            if (strlen($this->lastname) >= 12) {
+                $this->errors['lastname_error'] = "More then 12 char is not allowed in the lastname.";
+            }
 
-        if (empty($this->role)) {
-            $this->errors['role_error'] = 'please enter a user role.';
-        }
-        if (preg_match("/\b(select|insert|update|delete|drop|truncate|alter|union|create|exec|--|#|;)\b/i", $this->role)) {
-            $this->errors['role_error'] = "Please enter a valid role";
+            if (empty($this->email)) {
+                $this->errors['email_error'] = "Please enter the  email address.";
+            }
+
+            // if (filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+            //     $this->errors['email_error'] = "Please enter the valid email address.";
+            // }
+
+            if (strlen(trim($this->email)) >= 20) {
+                $this->errors['email_error'] = "More then 20 char is not allowed in the email.";
+            }
+
+            if (empty($this->password)) {
+                $this->errors['password_error'] = "Please enter the  password.";
+            }
+            if (preg_match("/\b(select|insert|update|delete|drop|truncate|alter|union|create|exec|--|#|;)\b/i", $this->password)) {
+                $this->errors['password_error'] = "Please enter a valid password";
+            }
+
+            if (empty($this->role)) {
+                $this->errors['role_error'] = 'please enter a user role.';
+            }
+            if (preg_match("/\b(select|insert|update|delete|drop|truncate|alter|union|create|exec|--|#|;)\b/i", $this->role)) {
+                $this->errors['role_error'] = "Please enter a valid role";
+            }
         }
     }
 
     public function InsertData()
     {
         if ($this->firstname && $this->lastname && $this->email && $this->password && $this->role) {
-            return $this->userModelObject->createUser($this->firstname, $this->lastname, $this->email, $this->password, $this->role);
+            // return $this->userModelObject->createUser($this->firstname, $this->lastname, $this->email, $this->password, $this->role);
+            $data = $this->userModelObject->createUser($this->firstname, $this->lastname, $this->email, $this->password, $this->role);
+            return $data;
         }
     }
 
@@ -113,9 +129,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if (isset($_POST['submit_btn'])) {
         $_SESSION['isEdit'] = false;
-        $userControllerObj->InsertData();
-        header("Location: " . "/Dashboard/view/AdminHome.php");
-        exit;
+        $res = $userControllerObj->InsertData();
+        if ($res) {
+            // header("Location: " . "/Dashboard/view/AdminHome.php");
+            // exit;
+        } else {
+            // header("Location: " . "/Dashboard/view/AddUser.php");
+            // exit;
+        }
     }
 
     if (isset($_POST['editUser'])) {
@@ -125,11 +146,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     if (isset($_POST['update_btn'])) {
-        $firstname = $_POST['firstname'];
-        $lastname = $_POST['lastname'];
-        $email = $_POST['email'];
-        $role = $_POST['role'];
-        $id = $_POST['userUpdateID'];
+        $firstname = trim($_POST['firstname']);
+        $lastname = trim($_POST['lastname']);
+        $email = trim($_POST['email']);
+        $role = trim($_POST['role']);
+        $id = trim($_POST['userUpdateID']);
         $userControllerObj->updateUserDetails($id, $firstname, $lastname, $email, $role);
     }
 

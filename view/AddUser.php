@@ -60,18 +60,15 @@ if ($_SESSION['authenticated'] !== true) {
 
         <?php if (!$_SESSION['isEdit']): ?>
             <lable class="lable" for="password"> Password: </lable>
-            <input type="password" class="input" id="password" name="password" value="<?php if ($data['password']) {
-                                                                                            echo $data['password'];
-                                                                                        } elseif ($_POST['password']) {
-                                                                                            echo $_POST['password'];
-                                                                                        }  ?>" />
-
-            <span id="password_show" name="password_show" style="padding: 3px; cursor: pointer;"> Show </span>
+            <div class="password-container" style="position: relative;">
+                <input type="password" class="input" id="password" name="password" value="<?php echo $data['password'] ?? $_POST['password'] ?? ''; ?>" />
+                <span class="toggle-eye" onclick="togglePassword()" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">👁️</span>
+            </div>
             <span class="error" name="password_error" id="password_error"> <?php echo ($userControllerObj->errors['password_error']) ?> </span>
         <?php endif; ?>
 
-        
-        
+
+
         <?php if ($_SESSION['isEdit']): ?>
             <input type="hidden" class="input" id="password" name="password" value="<?php if ($data['password']) {
                                                                                         echo $data['password'];
@@ -87,6 +84,8 @@ if ($_SESSION['authenticated'] !== true) {
         </select>
 
         <span class="error" name="role_error" id="role_error"> <?php echo ($userControllerObj->errors['role_error']) ?> </span>
+
+
         <?php if (!$_SESSION['isEdit']): ?>
             <button id="submit_btn" name="submit_btn"> Submit </button>
         <?php endif; ?>
@@ -97,11 +96,10 @@ if ($_SESSION['authenticated'] !== true) {
 </body>
 
 <script>
-    const password_show_btn = document.getElementById("password_show");
-    const password_show_value = document.getElementById("password_show").value;
-    password_show_btn.onclick(function() {
-        password_show_value.innerHTML = "heeelo";
-    });
+    function togglePassword() {
+        var passwordField = document.getElementById("password");
+        passwordField.type = passwordField.type === "password" ? "text" : "password";
+    }
 </script>
 
 

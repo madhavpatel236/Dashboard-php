@@ -67,19 +67,20 @@ class userModel
         $userCheck = "SELECT * FROM userData WHERE email = '$email'";
         $userCheckResult = mysqli_query($this->isConnect, $userCheck);
         if ($userCheckResult->num_rows > 0) {
-            // $user = $userCheckResult->fetch_assoc();
-            $user = mysqli_fetch_assoc($userCheckResult);
-            $_SESSION['userId'] = $user['Id'];
-            if (password_verify($password, $user['password'])) {
-                $_SESSION['authenticated'] = true;
-                $_SESSION['credential_error'] = false;
-                $_SESSION['role'] = 'user';
-                header("Location: /Dashboard/view/UserHome.php");
-                exit();
-            } else {
-                $_SESSION['credential_error'] = true;
-                header("Location: /Dashboard");
-                exit();
+            while ($user = $userCheckResult->fetch_assoc()) {
+                // $user = mysqli_fetch_assoc($userCheckResult);
+                $_SESSION['userId'] = $user['Id'];
+                if (password_verify($password, $user['password'])) {
+                    $_SESSION['authenticated'] = true;
+                    $_SESSION['credential_error'] = false;
+                    $_SESSION['role'] = 'user';
+                    header("Location: /Dashboard/view/UserHome.php");
+                    exit();
+                } else {
+                    $_SESSION['credential_error'] = true;
+                    header("Location: /Dashboard");
+                    exit();
+                }
             }
         } else {
             // $_SESSION['credential_error'] = true;
@@ -122,27 +123,26 @@ class userModel
         }
     }
 
-    // public function getUser()
-    // {
-    //     echo __LINE__ . var_dump($this->userId);
-    //     $userData = "SELECT * FROM userData WHERE Id = '$this->userId' ";
-    //     $userDataResult = mysqli_query($this->isConnect, $userData);
-    //     var_dump($userDataResult);
-
-    //     $userDetails = [];
-    //     if ($userDataResult->num_rows > 0) {
-    //         while ($row = $userDataResult->fetch_assoc()) {
-    //             $this->userDetails[] = [
-    //                 "firstname" => $row['firstName'],
-    //                 "lastname" => $row['lastName'],
-    //                 "email" => $row['email'],
-    //                 "role" => $row['role']
-    //             ];
-    //         }
-    //     }
-    //     // var_dump($userDetails);
-    //     // return $userDetails;
-    // }
+    public function getUser()
+    {
+        $ID = $_SESSION['userId'];
+        $userData = "SELECT * FROM userData WHERE Id = '$ID' ";
+        $userDataResult = mysqli_query($this->isConnect, $userData);
+        
+        $userDetails = [];
+        if ($userDataResult->num_rows > 0) {
+            while ($row = $userDataResult->fetch_assoc()) {
+                $userDetails[] = [
+                    "firstname" => $row['firstName'],
+                    "lastname" => $row['lastName'],
+                    "email" => $row['email'],
+                    "role" => $row['role']
+                ];
+            }
+        }
+        // echo  __LINE__ ; var_dump($userDetails);
+        return $userDetails;
+    }
 
     public function edituserData($userId)
     {
@@ -212,3 +212,4 @@ class userModel
 }
 
 $userModelObj = new userModel();
+// $userModelObj->getUser();

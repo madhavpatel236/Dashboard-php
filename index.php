@@ -4,7 +4,7 @@
 session_start();
 require('./constants.php');
 $_SESSION['authenticated'];
-// $_SESSION['credential_error'] ;
+// $_SESSION['credential_error'];
 $_SESSION['role'];
 $_SESSION['isEdit'];
 $_SESSION['userId'];
@@ -45,12 +45,12 @@ if ($_SESSION['authenticated'] == true && $_SESSION['role'] == 'admin') {
 
                 <div>
                     <input type="" class="input" id="password" name="password" />
-                    <div id="show_password" name="show_password" style="border: 2px solid black; padding: 2px; margin-left: 10px; cursor: pointer  ;" > show </div>
+                    <!-- <div id="show_password" name="show_password" style="border: 2px solid black; padding: 2px; margin-left: 10px; cursor: pointer  ;" > show </div> -->
                 </div>
 
                 <span class="error" id="password_error"></span>
                 <span class="error" id="general_error"> <?php
-                                                        if ($_SESSION['credential_error'] !== false) {
+                                                        if ($_SESSION['credential_error'] != false) {
                                                             echo "Please enter valid Credentials.";
                                                             $_SESSION['credential_error'] = false;
                                                         } else {

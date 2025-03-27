@@ -60,14 +60,18 @@ if ($_SESSION['authenticated'] !== true) {
 
         <?php if (!$_SESSION['isEdit']): ?>
             <lable class="lable" for="password"> Password: </lable>
-            <input class="input" id="password" name="password" value="<?php if ($data['password']) {
-                                                                            echo $data['password'];
-                                                                        } elseif ($_POST['password']) {
-                                                                            echo $_POST['password'];
-                                                                        }  ?>" />
+            <input type="password" class="input" id="password" name="password" value="<?php if ($data['password']) {
+                                                                                            echo $data['password'];
+                                                                                        } elseif ($_POST['password']) {
+                                                                                            echo $_POST['password'];
+                                                                                        }  ?>" />
+
+            <span id="password_show" name="password_show" style="padding: 3px; cursor: pointer;"> Show </span>
             <span class="error" name="password_error" id="password_error"> <?php echo ($userControllerObj->errors['password_error']) ?> </span>
         <?php endif; ?>
 
+        
+        
         <?php if ($_SESSION['isEdit']): ?>
             <input type="hidden" class="input" id="password" name="password" value="<?php if ($data['password']) {
                                                                                         echo $data['password'];
@@ -77,13 +81,7 @@ if ($_SESSION['authenticated'] !== true) {
         <?php endif; ?>
 
         <lable class="lable" for="role"> Role: </lable>
-        <!-- <input class="input" id="roles" name="role" value="<?php if ($data['role']) {
-                                                                echo $data['role'];
-                                                            } elseif ($_POST['role']) {
-                                                                echo $_POST['role'];
-                                                            } ?>" /> -->
-
-        <select name="role" >
+        <select name="role">
             <option id="roles" name="role" value="user">User</option>
             <option id="roles" name="role" value="admin">Admin</option>
         </select>
@@ -97,5 +95,14 @@ if ($_SESSION['authenticated'] !== true) {
         <?php endif; ?>
     </form>
 </body>
+
+<script>
+    const password_show_btn = document.getElementById("password_show");
+    const password_show_value = document.getElementById("password_show").value;
+    password_show_btn.onclick(function() {
+        password_show_value.innerHTML = "heeelo";
+    });
+</script>
+
 
 </html>

@@ -29,21 +29,21 @@ class userController
 
         // validation
         if (empty($this->firstname)) {
-            // $this->errors['firstname_error'] = "Please enter the firstname.";
+            $this->errors['firstname_error'] = "Please enter the firstname.";
         }
         if (preg_match("/\b(select|insert|update|delete|drop|truncate|alter|union|create|exec|--|#|;)\b/i", $this->firstname)) {
             $this->errors['firstname_error'] = "Please enter a valid first name";
         }
 
         if (empty($this->lastname)) {
-            // $this->errors['lastname_error'] = "Please enter the lastname.";
+            $this->errors['lastname_error'] = "Please enter the lastname.";
         }
         if (preg_match("/\b(select|insert|update|delete|drop|truncate|alter|union|create|exec|--|#|;)\b/i", $this->lastname)) {
             $this->errors['lastname_error'] = "Please enter a valid last name";
         }
 
         if (empty($this->email)) {
-            // $this->errors['email_error'] = "Please enter the  email address.";
+            $this->errors['email_error'] = "Please enter the  email address.";
         }
 
         if (filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
@@ -51,14 +51,14 @@ class userController
         }
 
         if (empty($this->password)) {
-            // $this->errors['password_error'] = "Please enter the  password.";
+            $this->errors['password_error'] = "Please enter the  password.";
         }
         if (preg_match("/\b(select|insert|update|delete|drop|truncate|alter|union|create|exec|--|#|;)\b/i", $this->password)) {
             $this->errors['password_error'] = "Please enter a valid password";
         }
 
         if (empty($this->role)) {
-            // $this->errors['role_error'] = 'please enter a user role.';
+            $this->errors['role_error'] = 'please enter a user role.';
         }
         if (preg_match("/\b(select|insert|update|delete|drop|truncate|alter|union|create|exec|--|#|;)\b/i", $this->role)) {
             $this->errors['role_error'] = "Please enter a valid role";

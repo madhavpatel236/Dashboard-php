@@ -60,32 +60,40 @@ document.getElementById("addUserForm").addEventListener("submit", function (e) {
     return emailRegex.test(email);
   }
 
-  // firstname.addEventListener("input", function () {
-  //   if (firstname.value.trim() !== "") {
-  //     firstname_error.textContent = "";
-  //   }
-  // }  );
+  firstname.addEventListener("input", function () {
+    if (firstname.value.trim() !== "") {
+      firstname_error.textContent = "";
+    }
+  });
 
-  // lastname.addEventListener("input", function () {
-  //   if (lastname.value.trim() !== "") {
-  //     lastname_error.textContent = "";
-  //   }
-  // });
+  lastname.addEventListener("input", function () {
+    if (lastname.value.trim() !== "") {
+      lastname_error.textContent = "";
+    }
+  });
 
-  // email.addEventListener("input", function () {
-  //   if (email.value.trim() !== "") {
-  //     email_error.textContent = "";
-  //   }
-  // });
+  email.addEventListener("input", function () {
+    if (email.value.trim() !== "") {
+      email_error.textContent = "";
+    }
+  });
 
-  // password.addEventListener("input", function () {
-  //   if (password.value.trim() !== "") {
-  //     password_error.textContent = "";
-  //   }
-  // });
-  // role.addEventListener("input", function () {
-  //   if (role.value.trim() !== "") {
-  //     role_error.textContent = "";
-  //   }
-  // });
+  password.addEventListener("input", function () {
+    if (password.value.trim() !== "") {
+      password_error.textContent = "";
+    }
+  });
+  role.addEventListener("input", function () {
+    if (role.value.trim() !== "") {
+      role_error.textContent = "";
+    }
+  });
 });
+
+// function show() {
+  // document
+  //   .getElementById("password_show")
+  //   .addEventListener("click", function () {
+  //     document.getElementById("password_show").innerText = "hello";
+  //   });
+// }

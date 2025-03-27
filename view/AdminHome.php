@@ -24,6 +24,12 @@ if ($_SESSION['authenticated'] !== true) {
                 Create User
             </button>
         </form>
+
+        <form  method="post">
+            <button type="submit" name="logout_btn">
+                Logout
+            </button>
+        </form>
     </div>
     <h2 class="heading-adminHome"> Admin Page </h2>
     <?php if (count($userControllerObj->getAllUserData()) !== 0): ?>

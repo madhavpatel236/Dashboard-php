@@ -74,7 +74,6 @@ class userController
     }
 
 
-
     public function  editUserDetails($editUserId)
     {
         return $this->userModelObject->edituserData($editUserId);
@@ -145,5 +144,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // var_dump("dcc");
         $_SESSION['isEdit'] = false;
     }
+
+    if (isset($_POST['logout_btn'])) {
+        $_SESSION['authenticated'] = false;
+        header("Location: /Dashboard");
+        exit;
+    }
+
 }
 $userControllerObj = new userController();

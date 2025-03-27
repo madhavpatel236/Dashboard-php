@@ -10,10 +10,10 @@ $_SESSION['isEdit'];
 $_SESSION['userId'];
 
 
-if($_SESSION['authenticated'] == true && $_SESSION['role'] == 'admin'){
+if ($_SESSION['authenticated'] == true && $_SESSION['role'] == 'admin') {
     header('Location: ./view/AdminHome.php');
-    exit(); 
-} elseif( $_SESSION['authenticated'] == true && $_SESSION['role'] == 'user'){
+    exit();
+} elseif ($_SESSION['authenticated'] == true && $_SESSION['role'] == 'user') {
     header("Location: ./view/UserHome.php");
     exit();
 }
@@ -42,7 +42,12 @@ if($_SESSION['authenticated'] == true && $_SESSION['role'] == 'admin'){
                 <span class="error" id="email_error"></span>
 
                 <label class="lable" for="password">Password:</label>
-                <input class="input" id="password" name="password" type="password" />
+
+                <div>
+                    <input type="" class="input" id="password" name="password" />
+                    <div id="show_password" name="show_password" style="border: 2px solid black; padding: 2px; margin-left: 10px; cursor: pointer  ;" > show </div>
+                </div>
+
                 <span class="error" id="password_error"></span>
                 <span class="error" id="general_error"> <?php
                                                         if ($_SESSION['credential_error'] !== false) {

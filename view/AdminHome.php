@@ -59,7 +59,7 @@ if ($_SESSION['authenticated'] !== true) {
                         <td class="table-body-data">
                             <form action="../controller/userController.php" method="POST">
                                 <input type="hidden" name="userId" value="<?php echo htmlspecialchars($eachUser['Id']); ?>">
-                                <button type="submit" name="deleteUser" class="delete-btn"> Delete </button>
+                                <button onClick="return confirm('do you really want this')" value="click" type="submit" name="deleteUser" class="delete-btn"> Delete </button>
                             </form>
                         </td>
                     </tr>
@@ -72,5 +72,8 @@ if ($_SESSION['authenticated'] !== true) {
         <h3> No User are there </h3>
     <?php endif; ?>
 </body>
+
+
+
 
 </html>

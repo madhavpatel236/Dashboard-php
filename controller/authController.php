@@ -31,6 +31,10 @@ class authController
         $this->userModelObject->authentication($this->email, $this->password);
     }
 
+    // public function getUser()
+    // {
+    //     return $this->userModelObject->getUser();
+    // }
 }
 
 
@@ -40,8 +44,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     if (isset($_POST['submit'])) {
         $authControllerObj->authUser();
-    } 
-
+        // $authControllerObj->getUser();
+    }
 }
 
 $authControllerObj = new authController();

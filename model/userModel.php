@@ -16,6 +16,7 @@ class userModel
 
     public function __construct()
     {
+        // var_dump($_SESSION['userId']);
         $conf = new database();
         $this->isConnect = $conf->dbConnection();
 
@@ -66,13 +67,13 @@ class userModel
         $userCheck = "SELECT * FROM userData WHERE email = '$email'";
         $userCheckResult = mysqli_query($this->isConnect, $userCheck);
         if ($userCheckResult->num_rows > 0) {
+            // $user = $userCheckResult->fetch_assoc();
             $user = mysqli_fetch_assoc($userCheckResult);
-            $userId = $user['Id'];
+            $_SESSION['userId'] = $user['Id'];
             if (password_verify($password, $user['password'])) {
                 $_SESSION['authenticated'] = true;
                 $_SESSION['credential_error'] = false;
                 $_SESSION['role'] = 'user';
-                $_SESSION['userId'] = $userId;
                 header("Location: /Dashboard/view/UserHome.php");
                 exit();
             } else {
@@ -85,7 +86,9 @@ class userModel
             header("Location: /Dashboard");
             exit();
         }
+        // echo __LINE__ .   var_dump($this->userId);
     }
+
 
     // Insert data in db 
     public function createUser($firstname, $lastname, $email, $password, $role)
@@ -121,11 +124,10 @@ class userModel
 
     // public function getUser()
     // {
-    //     echo __LINE__ .var_dump($_SESSION['userId']);
-    //     $userId = variant_int($_SESSION['userId']);  
-    //     $userData = "SELECT * FROM userData WHERE Id = '$userId' ";
+    //     echo __LINE__ . var_dump($this->userId);
+    //     $userData = "SELECT * FROM userData WHERE Id = '$this->userId' ";
     //     $userDataResult = mysqli_query($this->isConnect, $userData);
-    //     // var_dump($userData);
+    //     var_dump($userDataResult);
 
     //     $userDetails = [];
     //     if ($userDataResult->num_rows > 0) {
@@ -139,7 +141,7 @@ class userModel
     //         }
     //     }
     //     // var_dump($userDetails);
-    //     return $userDetails;
+    //     // return $userDetails;
     // }
 
     public function edituserData($userId)
@@ -210,5 +212,3 @@ class userModel
 }
 
 $userModelObj = new userModel();
-// $userModelObj->getUser();
-// var_dump($userModelObj->getUser());

@@ -7,7 +7,7 @@ $_SESSION['authenticated'];
 $_SESSION['credential_error'];
 $_SESSION['role'];
 $_SESSION['isEdit'];
-$_SESSION['userId'] ;
+$_SESSION['userId'];
 
 
 if($_SESSION['authenticated'] == true && $_SESSION['role'] == 'admin'){

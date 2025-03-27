@@ -1,12 +1,11 @@
 <?php
-include '../controller/userController.php';
+include '../controller/authController.php';
 
 if ($_SESSION['authenticated'] !== true) {
     header("Location: ../index.php");
     exit;
 }
 
-// var_dump($authControllerObj->getUser());
 ?>
 
 <!DOCTYPE html>
@@ -20,7 +19,7 @@ if ($_SESSION['authenticated'] !== true) {
 
 <body>
     <div>
-        <h1>Hello</h1>
+        <h1>Hello USER</h1>
         <div>
 
         </div>

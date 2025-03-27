@@ -45,7 +45,7 @@ class userController
         if (empty($this->email)) {
             // $this->errors['email_error'] = "Please enter the  email address.";
         }
-       
+
         if (filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
             // $this->errors['email_error'] = "Please enter the valid email address.";
         }
@@ -57,7 +57,7 @@ class userController
             $this->errors['password_error'] = "Please enter a valid password";
         }
 
-        if(empty($this->role)){
+        if (empty($this->role)) {
             // $this->errors['role_error'] = 'please enter a user role.';
         }
 
@@ -73,7 +73,7 @@ class userController
         }
     }
 
-    
+
 
     public function  editUserDetails($editUserId)
     {
@@ -106,9 +106,6 @@ class userController
         $this->userModelObject->deleteIndividualUser($this->userId);
     }
 
-    // public function getUser(){
-    //     return $this->userModelObject->getUser();
-    // }
 }
 
 $userControllerObj = new userController();
@@ -116,6 +113,7 @@ $userControllerObj = new userController();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $userControllerObj = new userController();
     $userEditId;
+
 
     if (isset($_POST['submit_btn'])) {
         // $_SESSION['isEdit'] = false;

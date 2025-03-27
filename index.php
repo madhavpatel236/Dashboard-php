@@ -4,7 +4,7 @@
 session_start();
 require('./constants.php');
 $_SESSION['authenticated'];
-$_SESSION['credential_error'];
+// $_SESSION['credential_error'] ;
 $_SESSION['role'];
 $_SESSION['isEdit'];
 $_SESSION['userId'];

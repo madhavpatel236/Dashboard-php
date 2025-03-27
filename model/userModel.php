@@ -83,7 +83,7 @@ class userModel
                 }
             }
         } else {
-            // $_SESSION['credential_error'] = true;
+            $_SESSION['credential_error'] = true;
             header("Location: /Dashboard");
             exit();
         }

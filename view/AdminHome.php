@@ -25,7 +25,7 @@ if ($_SESSION['authenticated'] !== true) {
             </button>
         </form>
 
-        <form  method="post">
+        <form method="post">
             <button type="submit" name="logout_btn">
                 Logout
             </button>

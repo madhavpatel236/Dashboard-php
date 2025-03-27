@@ -10,7 +10,7 @@ document.getElementById("loginForm").addEventListener("submit", function (e) {
   clearErrors();
   
   if (email.value.trim() === "") {
-    emailError.textContent = "Email is required";
+    emailError.innerText = "Email is required";
     isValid = false;
   } else if (!isValidEmail(email.value)) {
     emailError.textContent = "Please enter a valid email address";
@@ -48,33 +48,3 @@ document.getElementById("loginForm").addEventListener("submit", function (e) {
     }
   });
 });
-
-
-
-// $("#loginForm").validate({
-//   debug:true,
-//   rules: {
-//     firstname: {
-//       required: true,
-//     },
-//     lastname: {
-//       required: true,
-//     },
-//     email: {
-//       required: password,
-//       email: true,
-//     },
-//     password: {
-//       required: true,
-//       minlength: 6,
-//     },
-//   },
-//   message: {
-//     firstname: "please enter your firstname.",
-//     lastname: "please enter your lastname",
-//     email: {
-//       required: " Please enter your last email address. ",
-//       email: "please enter a valid email address",
-//     },
-//   },
-// });

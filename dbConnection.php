@@ -13,12 +13,6 @@ class database
     {
         $connection = new mysqli($this->host, $this->username, $this->password);
         $crateDB = " CREATE DATABASE IF NOT EXISTS dashboard ";
-
-        // if ($connection->query($crateDB) == "TRUE") {
-        //     echo "<script> console.log('Database created sucessfully!!') </script>";
-        // } else {
-        //     echo $connection->error . "<script> console.log('*ERROR: Database was not created ') </script>";
-        // }
     }
 
     public function dbConnection()

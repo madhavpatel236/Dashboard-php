@@ -123,6 +123,7 @@ class userModel
         }
     }
 
+    // get the user data for the UserHome.php files.
     public function getUser()
     {
         $ID = $_SESSION['userId'];

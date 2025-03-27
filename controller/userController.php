@@ -77,7 +77,7 @@ class userController
 
     public function  editUserDetails($editUserId)
     {
-        return  $this->userModelObject->edituserData($editUserId);
+        return $this->userModelObject->edituserData($editUserId);
     }
 
     public function updateUserDetails($userEditId, $firstname, $lastname, $email, $role)

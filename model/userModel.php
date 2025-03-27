@@ -67,10 +67,12 @@ class userModel
         $userCheckResult = mysqli_query($this->isConnect, $userCheck);
         if ($userCheckResult->num_rows > 0) {
             $user = mysqli_fetch_assoc($userCheckResult);
+            $userId = $user['Id'];
             if (password_verify($password, $user['password'])) {
                 $_SESSION['authenticated'] = true;
                 $_SESSION['credential_error'] = false;
                 $_SESSION['role'] = 'user';
+                $_SESSION['userId'] = $userId;
                 header("Location: /Dashboard/view/UserHome.php");
                 exit();
             } else {
@@ -85,33 +87,13 @@ class userModel
         }
     }
 
-    // public function userPresent($email, $password)
-    // {
-    //     $getuser = "SELECT * FROM userData WHERE email = '$email' ";
-    //     $getUserresult = mysqli_query($this->isConnect, $getuser);
-
-    //     if ($getUserresult->num_rows > 0) {
-    //         $row = $getUserresult->fetch_assoc();
-    //         if (password_verify($password, $row['password'])) {
-    //             // echo "present". $row['id'];
-    //             return true;
-    //         } else {
-    //             // echo "not present". ", " . $email . ", " .$password;
-    //             // $error= "User is not present";
-    //             return false;
-    //         }
-    //     } else {
-    //         return false;
-    //     }
-    // }
-
     // Insert data in db 
     public function createUser($firstname, $lastname, $email, $password, $role)
     {
+        $_SESSION['isEdit'] = false;
         $userRole = strtolower($role);
         $hashPassword = password_hash($password, PASSWORD_DEFAULT);
-        // $hashPassword = ($password, PASSWORD_DEFAULT);
-        echo $hashPassword;
+        // echo $hashPassword;
 
         $table = "CREATE TABLE IF NOT EXISTS userData(        
         Id INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -125,7 +107,7 @@ class userModel
         if ($this->isConnect->query($table)) {
             echo "<script> console.log('Table was created sucessfully!!!');  </script>";
         } else {
-            // echo __LINE__ .  $this->isConnect->error;
+            echo __LINE__ .  $this->isConnect->error;
         }
 
         // Insert :
@@ -133,15 +115,38 @@ class userModel
         if ($this->isConnect->query($insertData)) {
             echo "<script> console.log('data added sucessfully!!!');  </script>";
         } else {
-            // echo __LINE__ .  $this->isConnect->error;
+            echo __LINE__ .  $this->isConnect->error;
         }
     }
+
+    // public function getUser()
+    // {
+    //     echo __LINE__ .var_dump($_SESSION['userId']);
+    //     $userId = variant_int($_SESSION['userId']);  
+    //     $userData = "SELECT * FROM userData WHERE Id = '$userId' ";
+    //     $userDataResult = mysqli_query($this->isConnect, $userData);
+    //     // var_dump($userData);
+
+    //     $userDetails = [];
+    //     if ($userDataResult->num_rows > 0) {
+    //         while ($row = $userDataResult->fetch_assoc()) {
+    //             $this->userDetails[] = [
+    //                 "firstname" => $row['firstName'],
+    //                 "lastname" => $row['lastName'],
+    //                 "email" => $row['email'],
+    //                 "role" => $row['role']
+    //             ];
+    //         }
+    //     }
+    //     // var_dump($userDetails);
+    //     return $userDetails;
+    // }
 
     public function edituserData($userId)
     {
         $user = " SELECT * FROM userData WHERE Id = '$userId' ";
         $userResult = mysqli_query($this->isConnect, $user);
-        
+
         if ($userResult->num_rows > 0) {
             while ($row = $userResult->fetch_assoc()) {
                 $userData = [
@@ -162,7 +167,7 @@ class userModel
         // echo  $userId;
         $update = " UPDATE userData SET firstName = '$firstname', lastName = '$lastname', email = '$email', role = '$role' WHERE Id = '$userId' ";
         $updateResult = mysqli_query($this->isConnect, $update);
-        if($updateResult){
+        if ($updateResult) {
             $_SESSION['isEdit'] = false;
         } else {
             $_SESSION['isEdit'] = true;
@@ -205,6 +210,5 @@ class userModel
 }
 
 $userModelObj = new userModel();
-// $userModelObj->userPresent("madhav@elsner.com", "Madhav123");
-// $userModelObj->updateUserData(7);
-// $userModelObj->createUser( "parth123456", "patel", "parth@gmail.com", "patel@123", "user");
+// $userModelObj->getUser();
+// var_dump($userModelObj->getUser());

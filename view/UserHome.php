@@ -6,6 +6,7 @@ if ($_SESSION['authenticated'] !== true) {
     exit;
 }
 
+// var_dump($authControllerObj->getUser());
 ?>
 
 <!DOCTYPE html>

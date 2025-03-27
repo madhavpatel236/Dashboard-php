@@ -2,13 +2,10 @@
 // var_dump(($_SESSION['userId']));
 include dirname(__DIR__) . "/controller/userController.php";
 
-// var_dump($_POST);
-
 if ($_SESSION['authenticated'] !== true) {
     header("Location: ../index.php");
     exit;
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -42,7 +39,7 @@ if ($_SESSION['authenticated'] !== true) {
                                                                     } elseif ($_POST['firstname']) {
                                                                         echo $_POST['firstname'];
                                                                     } ?> " />
-        <span class="error" name="firstname_error" id="firstname_error"> </span>
+        <span class="error" name="firstname_error" id="firstname_error"> <?php echo($userControllerObj->errors['firstname_error']) ?> </span>
 
 
         <lable class="lable" for="lastname"> Last name: </lable>
@@ -51,7 +48,7 @@ if ($_SESSION['authenticated'] !== true) {
                                                                     } elseif ($_POST['lastname']) {
                                                                         echo $_POST['lastname'];
                                                                     } ?> " />
-        <span class="error" name="lastname_error" id="lastname_error"> </span>
+        <span class="error" name="lastname_error" id="lastname_error"> <?php echo($userControllerObj->errors['lastname_error']) ?> </span>
 
         <lable class="lable" for="email"> Email: </lable>
         <input class="input" id="email" name="email" value="<?php if ($data['email']) {
@@ -59,7 +56,7 @@ if ($_SESSION['authenticated'] !== true) {
                                                             } elseif ($_POST['email']) {
                                                                 echo $_POST['email'];
                                                             }   ?>" />
-        <span class="error" name="email_error" id="email_error"> </span>
+        <span class="error" name="email_error" id="email_error"> <?php echo($userControllerObj->errors['email_error']) ?> </span>
 
         <?php if (!$_SESSION['isEdit']): ?>
             <lable class="lable" for="password"> Password: </lable>
@@ -68,14 +65,16 @@ if ($_SESSION['authenticated'] !== true) {
                                                                         } elseif ($_POST['password']) {
                                                                             echo $_POST['password'];
                                                                         }  ?>" />
-            <span class="error" name="password_error" id="password_error"> </span>
+            <span class="error" name="password_error" id="password_error"> <?php echo($userControllerObj->errors['password_error']) ?> </span>
         <?php endif; ?>
 
-        <input type="hidden" class="input" id="password" name="password" value="<?php if ($data['password']) {
-                                                                                    echo $data['password'];
-                                                                                } elseif ($_POST['password']) {
-                                                                                    echo $_POST['password'];
-                                                                                }  ?>" />
+        <?php if ($_SESSION['isEdit']): ?>
+            <input type="hidden" class="input" id="password" name="password" value="<?php if ($data['password']) {
+                                                                                        echo $data['password'];
+                                                                                    } elseif ($_POST['password']) {
+                                                                                        echo $_POST['password'];
+                                                                                    }  ?>" />
+        <?php endif; ?>
 
         <lable class="lable" for="role"> Role: </lable>
         <input class="input" id="roles" name="role" value="<?php if ($data['role']) {
@@ -83,7 +82,7 @@ if ($_SESSION['authenticated'] !== true) {
                                                             } elseif ($_POST['role']) {
                                                                 echo $_POST['role'];
                                                             } ?>" />
-        <span class="role" name="role_error" id="role_error"> </span>
+        <span class="error" name="role_error" id="role_error"> <?php echo($userControllerObj->errors['role_error']) ?> </span>
 
         <?php if (!$_SESSION['isEdit']): ?>
             <button id="submit_btn" name="submit_btn"> Submit </button>

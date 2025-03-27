@@ -12,7 +12,7 @@ class userController
     public $userModelObject;
     public $userId = '';
     public $editUserId;
-    public $errors = array("firstname_error" => "", "lastname_error" => "", "email_error" => "", "password_error" => "",);
+    public $errors = array("firstname_error" => "", "lastname_error" => "", "email_error" => "", "password_error" => "", "role_error" => "");
 
     public function __construct()
     {
@@ -25,21 +25,44 @@ class userController
         $this->userId = isset($_POST['deleteUser']) ? $_POST['userId'] : "";
         $this->editUserId = $_POST['editUserId'];
 
+        // var_dump(preg_match_all("^(?=.*SELECT.*FROM)(?!.*(?:CREATE|DROP|UPDATE|INSERT|ALTER|DELETE|ATTACH|DETACH)).*$", $this->firstname));
+
         // validation
         if (empty($this->firstname)) {
-            $this->errors['email_error'] = "Please enter the admin email address.";
+            // $this->errors['firstname_error'] = "Please enter the firstname.";
         }
+        if (preg_match("/\b(select|insert|update|delete|drop|truncate|alter|union|create|exec|--|#|;)\b/i", $this->firstname)) {
+            $this->errors['firstname_error'] = "Please enter a valid first name";
+        }
+
         if (empty($this->lastname)) {
-            $this->errors['password_error'] = "Please enter the admin password.";
+            // $this->errors['lastname_error'] = "Please enter the lastname.";
         }
+        if (preg_match("/\b(select|insert|update|delete|drop|truncate|alter|union|create|exec|--|#|;)\b/i", $this->lastname)) {
+            $this->errors['lastname_error'] = "Please enter a valid last name";
+        }
+
         if (empty($this->email)) {
-            $this->errors['email_error'] = "Please enter the admin email address.";
+            // $this->errors['email_error'] = "Please enter the  email address.";
         }
-        if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
-            $this->errors['email_error'] = "Please enter the valid email address.";
+       
+        if (filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+            // $this->errors['email_error'] = "Please enter the valid email address.";
         }
+
         if (empty($this->password)) {
-            $this->errors['password_error'] = "Please enter the admin password.";
+            // $this->errors['password_error'] = "Please enter the  password.";
+        }
+        if (preg_match("/\b(select|insert|update|delete|drop|truncate|alter|union|create|exec|--|#|;)\b/i", $this->password)) {
+            $this->errors['password_error'] = "Please enter a valid password";
+        }
+
+        if(empty($this->role)){
+            // $this->errors['role_error'] = 'please enter a user role.';
+        }
+
+        if (preg_match("/\b(select|insert|update|delete|drop|truncate|alter|union|create|exec|--|#|;)\b/i", $this->role)) {
+            $this->errors['role_error'] = "Please enter a valid role";
         }
     }
 
@@ -49,6 +72,8 @@ class userController
             return $this->userModelObject->createUser($this->firstname, $this->lastname, $this->email, $this->password, $this->role);
         }
     }
+
+    
 
     public function  editUserDetails($editUserId)
     {
@@ -80,6 +105,10 @@ class userController
     {
         $this->userModelObject->deleteIndividualUser($this->userId);
     }
+
+    // public function getUser(){
+    //     return $this->userModelObject->getUser();
+    // }
 }
 
 $userControllerObj = new userController();

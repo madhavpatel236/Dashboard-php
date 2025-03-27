@@ -19,6 +19,15 @@ document.getElementById("addUserForm").addEventListener("submit", function (e) {
     isValid = false;
   }
 
+  // const regex =
+  //   "^(?=.*SELECT.*FROM)(?!.*(?:CREATE|DROP|UPDATE|INSERT|ALTER|DELETE|ATTACH|DETACH)).*$";
+  // firstname_error.innerText = regex.test(firstname.value);
+
+  // if("^(?=.*SELECT.*FROM)(?!.*(?:CREATE|DROP|UPDATE|INSERT|ALTER|DELETE|ATTACH|DETACH)).*$".test(firstname.value.trim())) {
+  //   firstname_error.textContent = "Please enter valid firstname.";
+  //   isValid = false;
+  // }
+
   if (lastname.value.trim() == "") {
     lastname_error.textContent = "lastname is required";
     isValid = false;
@@ -51,32 +60,32 @@ document.getElementById("addUserForm").addEventListener("submit", function (e) {
     return emailRegex.test(email);
   }
 
-  firstname.addEventListener("input", function () {
-    if (firstname.value.trim() !== "") {
-      firstname_error.textContent = "";
-    }
-  });
+  // firstname.addEventListener("input", function () {
+  //   if (firstname.value.trim() !== "") {
+  //     firstname_error.textContent = "";
+  //   }
+  // }  );
 
-  lastname.addEventListener("input", function () {
-    if (lastname.value.trim() !== "") {
-      lastname_error.textContent = "";
-    }
-  });
+  // lastname.addEventListener("input", function () {
+  //   if (lastname.value.trim() !== "") {
+  //     lastname_error.textContent = "";
+  //   }
+  // });
 
-  email.addEventListener("input", function () {
-    if (email.value.trim() !== "") {
-      email_error.textContent = "";
-    }
-  });
+  // email.addEventListener("input", function () {
+  //   if (email.value.trim() !== "") {
+  //     email_error.textContent = "";
+  //   }
+  // });
 
-  password.addEventListener("input", function () {
-    if (password.value.trim() !== "") {
-      password_error.textContent = "";
-    }
-  });
-  role.addEventListener("input", function () {
-    if (role.value.trim() !== "") {
-      role_error.textContent = "";
-    }
-  });
+  // password.addEventListener("input", function () {
+  //   if (password.value.trim() !== "") {
+  //     password_error.textContent = "";
+  //   }
+  // });
+  // role.addEventListener("input", function () {
+  //   if (role.value.trim() !== "") {
+  //     role_error.textContent = "";
+  //   }
+  // });
 });

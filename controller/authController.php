@@ -1,13 +1,11 @@
 <?php
 
 include "../model/userModel.php";
-// var_dump($_POST);
 class authController
 {
     public $email;
     public $password;
     public $userModelObject;
-    // public $isUserPresent;
     public $errors = array("email_error" => '', "password_error" => '', "general_error" => '');
 
     public function __construct()
@@ -32,6 +30,7 @@ class authController
     {
         $this->userModelObject->authentication($this->email, $this->password);
     }
+
 }
 
 
@@ -41,6 +40,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     if (isset($_POST['submit'])) {
         $authControllerObj->authUser();
-    }
+    } 
+
 }
 
+$authControllerObj = new authController();

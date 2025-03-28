@@ -16,7 +16,7 @@ if ($_SESSION['authenticated'] !== true) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../assets/style.css">
-    <script defer src="../assets/AddUserFormauth.js "></script>
+    <script defer src="../assets/AddUserFormauth.js"></script>
 </head>
 
 <body>
@@ -39,7 +39,7 @@ if ($_SESSION['authenticated'] !== true) {
                                                                     } elseif ($_POST['firstname']) {
                                                                         echo $_POST['firstname'];
                                                                     } ?> " />
-        <span class="error" name="firstname_error" id="firstname_error"> <?php echo ($userControllerObj->errors['firstname_error']) ?> </span>
+        <span class="error" name="firstname_error" id="firstname_error"> <?php echo ($userControllerObj->errors['firstname_error']) ?>  </span>
 
 
         <lable class="lable" for="lastname"> Last name: </lable>

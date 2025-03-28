@@ -5,14 +5,9 @@ document.getElementById("loginForm").addEventListener("submit", function (e) {
   const password = document.getElementById("password");
   const emailError = document.getElementById("email_error");
   const passwordError = document.getElementById("password_error");
-  const showPass = document.getElementById("show_password");
   let isValid = true;
 
   clearErrors();
-
-  // showPass.onclick(function () {
-  //   password.attributes.type.innerText = 'password';
-  // });
 
   if (email.value.trim() === "") {
     emailError.innerText = "Email is required";

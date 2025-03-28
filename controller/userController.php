@@ -29,11 +29,11 @@ class userController
         // validation
         if (isset($_POST['submit_btn']) || isset($_POST['update_btn'])) {
             if (empty($this->firstname)) {
-                $this->errors['firstname_error'] = "Please enter the firstnamess.";
+                $this->errors['firstname_error'] = "Please enter the firstname.";
             }
 
             if (strlen(trim($this->firstname)) >= 12) {
-                $this->errors['firstname_error'] = "More then 12 char is not allowed in the firstname.";
+                $this->errors['firstname_error'] = "More then 12 character is not allowed in the firstname.";
             }
 
             if (preg_match("/\b(select|insert|update|delete|drop|truncate|alter|union|create|exec|--|#|;)\b/i", $this->firstname)) {
@@ -55,9 +55,9 @@ class userController
                 $this->errors['email_error'] = "Please enter the  email address.";
             }
 
-            // if (filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
-            //     $this->errors['email_error'] = "Please enter the valid email address.";
-            // }
+            if (filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+                $this->errors['email_error'] = "Please enter the valid email address.";
+            }
 
             if (strlen(trim($this->email)) >= 20) {
                 $this->errors['email_error'] = "More then 20 char is not allowed in the email.";

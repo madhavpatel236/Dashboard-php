@@ -189,8 +189,10 @@ class userModel
                 $isEmailPresent = "SELECT * FROM userData WHERE email != '$userPresentEmail' AND  email = '$email' ";
                 $isEmailPresentResult = $this->isConnect->query($isEmailPresent);
                 if ($isEmailPresentResult->num_rows > 0) {
+                    $_SESSION['isEmailPresent'] = true;
                     return false;
                 } else {
+                    // $_SESSION['isEmailPresent'] = false;
                     $update = " UPDATE userData SET firstName = '$firstname', lastName = '$lastname', email = '$email', role = '$role' WHERE Id = '$userId' ";
                     $updateResult = mysqli_query($this->isConnect, $update);
                     if ($updateResult) {

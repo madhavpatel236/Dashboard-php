@@ -56,6 +56,7 @@ class userController
             if ($_SESSION['isEmailPresent'] == true) {
                 $this->errors['email_error'] = "This email is already present.";
             }
+            
             if (empty($this->email)) {
                 $this->errors['email_error'] = "Please enter the  email address.";
             }
@@ -159,9 +160,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $data = $userControllerObj->updateUserDetails($id, $firstname, $lastname, $email, $role);
         
         if ($data) {
-            $_SESSION['isEmailPresent'] = true;
+            // $_SESSION['isEmailPresent'] = true;
         } else {
-            $_SESSION['isEmailPresent'] = false;
+            // $_SESSION['isEmailPresent'] = false;
         }
     }
 

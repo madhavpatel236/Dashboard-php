@@ -134,7 +134,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($data == false) {
             // $_SESSION['isEmailPresent'] = true;
         } else {
-            // $_SESSION['isEmailPresent'] = false;
+            // // $_SESSION['isEmailPresent'] = false;
             header("Location: " . "/Dashboard/view/AdminHome.php");
             exit;
         }

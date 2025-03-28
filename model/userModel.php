@@ -184,14 +184,19 @@ class userModel
         $userPresentEmail = '';
 
         if ($firstname != "" && $lastname != '' && $email != '') {
+
             $userData = " SELECT * FROM userData WHERE Id = '$userId' ";
             $userDataResult =  $this->isConnect->query($userData);
+
             if ($userDataResult->num_rows > 0) {
                 $row = $userDataResult->fetch_assoc();
                 $userPresentEmail = $row['email'];
 
                 $isEmailPresent = "SELECT * FROM userData WHERE email != '$userPresentEmail' AND  email = '$email' ";
                 $isEmailPresentResult = $this->isConnect->query($isEmailPresent);
+
+                var_dump($isEmailPresentResult);
+
                 if ($isEmailPresentResult->num_rows > 0) {
                     $_SESSION['isEmailPresent'] = true;
                     return false;

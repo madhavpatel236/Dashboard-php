@@ -118,9 +118,13 @@ class userModel
         $insertData = "INSERT INTO userData(firstName, lastName, email, password, role) VALUES ( '$firstname' , '$lastname' , '$email', '$hashPassword', '$userRole')";
         $insertDataResult = $this->isConnect->query($insertData);
         if ($insertDataResult) {
+            return $insertData;
+            // header("Location: /Dashboard/view/AdminHome.php");
+            // exit;
             echo "<script> console.log('data added sucessfully!!!');  </script>";
         } else {
-
+            // header("Location: /Dashboard/view/AddUser.php");
+            // exit;
             // echo __LINE__ .  $this->isConnect->error;
         }
     }

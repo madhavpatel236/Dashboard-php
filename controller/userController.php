@@ -84,6 +84,7 @@ class userController
         if ($this->firstname && $this->lastname && $this->email && $this->password && $this->role) {
             // return $this->userModelObject->createUser($this->firstname, $this->lastname, $this->email, $this->password, $this->role);
             $data = $this->userModelObject->createUser($this->firstname, $this->lastname, $this->email, $this->password, $this->role);
+            // var_dump($data);
             return $data;
         }
     }
@@ -129,13 +130,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if (isset($_POST['submit_btn'])) {
         $_SESSION['isEdit'] = false;
-        $res = $userControllerObj->InsertData();
-        if ($res) {
-            // header("Location: " . "/Dashboard/view/AdminHome.php");
-            // exit;
-        } else {
+        $data = $userControllerObj->InsertData();
+        // var_dump($data);
+        if($data == NULL){
             // header("Location: " . "/Dashboard/view/AddUser.php");
             // exit;
+        } else {
+            header("Location: " . "/Dashboard/view/AdminHome.php");
+            exit;
         }
     }
 

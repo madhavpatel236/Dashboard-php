@@ -4,7 +4,6 @@
 session_start();
 require('./constants.php');
 $_SESSION['authenticated'];
-// $_SESSION['credential_error'];
 $_SESSION['role'];
 $_SESSION['isEdit'];
 $_SESSION['userId'];
@@ -39,20 +38,18 @@ if ($_SESSION['authenticated'] == true && $_SESSION['role'] == 'admin') {
             <form action="./controller/authController.php" method="post">
                 <label class="lable" for="email">Email:</label>
                 <input class="input" id="email" name="email" type="email" />
-                <span class="error" id="email_error"></span>
+                <span class="error" id="email_error"> <?php ?> </span>
 
                 <label class="lable" for="password">Password:</label>
 
                 <div>
                     <div class="password-container" style="position: relative;">
-                        <!-- <input type="password" class="input" id="password" name="password" value="<?php echo $data['password'] ?? $_POST['password'] ?? ''; ?>" /> -->
                         <input type="" class="input" id="password" name="password" />
                         <span class="toggle-eye" onclick="togglePassword()" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">👁️</span>
                     </div>
-                    <!-- <div id="show_password" name="show_password" style="border: 2px solid black; padding: 2px; margin-left: 10px; cursor: pointer  ;" > show </div> -->
                 </div>
-
                 <span class="error" id="password_error"></span>
+
                 <span class="error" id="general_error"> <?php
                                                         if ($_SESSION['credential_error'] != false) {
                                                             echo "Please enter valid Credentials.";

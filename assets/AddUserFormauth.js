@@ -14,7 +14,7 @@ document.getElementById("addUserForm").addEventListener("submit", function (e) {
 
   let isValid = true;
 
-  if (firstname.value.trim() == "") {
+  if (firstname.value.trim() === "") {
     firstname_error.textContent = "firstname is required";
     isValid = false;
   }
@@ -25,15 +25,6 @@ document.getElementById("addUserForm").addEventListener("submit", function (e) {
   }
 
   if (lastname.value.trim() == "") {
-    // const regex =
-    //   "^(?=.*SELECT.*FROM)(?!.*(?:CREATE|DROP|UPDATE|INSERT|ALTER|DELETE|ATTACH|DETACH)).*$";
-    // firstname_error.innerText = regex.test(firstname.value);
-
-    // if("^(?=.*SELECT.*FROM)(?!.*(?:CREATE|DROP|UPDATE|INSERT|ALTER|DELETE|ATTACH|DETACH)).*$".test(firstname.value.trim())) {
-    //   firstname_error.textContent = "Please enter valid firstname.";
-    //   isValid = false;
-    // }
-
     lastname_error.textContent = "lastname is required";
     isValid = false;
   }

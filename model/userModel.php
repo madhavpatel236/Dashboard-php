@@ -173,15 +173,19 @@ class userModel
     // update userdata
     public function updateUserData($userId, $firstname, $lastname, $email, $role)
     {
-        // echo  $userId;
-        $update = " UPDATE userData SET firstName = '$firstname', lastName = '$lastname', email = '$email', role = '$role' WHERE Id = '$userId' ";
-        $updateResult = mysqli_query($this->isConnect, $update);
-        if ($updateResult) {
-            $_SESSION['isEdit'] = false;
+
+        if ($firstname != "" && $lastname != '' && $email != '') {
+            $update = " UPDATE userData SET firstName = '$firstname', lastName = '$lastname', email = '$email', role = '$role' WHERE Id = '$userId' ";
+            $updateResult = mysqli_query($this->isConnect, $update);
+            if ($updateResult) {
+                $_SESSION['isEdit'] = false;
+            } else {
+                $_SESSION['isEdit'] = true;
+            }
+            return $updateResult;
         } else {
-            // $_SESSION['isEdit'] = true;
+            return false;
         }
-        return $updateResult;
     }
 
     // used in the AdminHomepage

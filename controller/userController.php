@@ -103,11 +103,8 @@ class userController
             $_SESSION['isEdit'] = false;
             header("Location: /Dashboard/view/AdminHome.php ");
             exit;
-        } else {
-            // header("Location: {$_SERVER['PHP_SELF']} ");
-            // return "ERROR: Data was not updated.";
-            // exit;
-        }
+        } 
+        return $isUpdate;
     }
 
     public function getAllUserData()
@@ -132,7 +129,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['isEdit'] = false;
         $data = $userControllerObj->InsertData();
         // var_dump($data);
-        if($data == NULL){
+        if ($data == NULL) {
             // header("Location: " . "/Dashboard/view/AddUser.php");
             // exit;
         } else {
@@ -153,7 +150,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $email = trim($_POST['email']);
         $role = trim($_POST['role']);
         $id = trim($_POST['userUpdateID']);
-        $userControllerObj->updateUserDetails($id, $firstname, $lastname, $email, $role);
+        $data = $userControllerObj->updateUserDetails($id, $firstname, $lastname, $email, $role);
     }
 
     if (isset($_POST['deleteUser'])) {

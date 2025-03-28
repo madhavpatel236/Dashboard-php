@@ -29,7 +29,7 @@ class userController
         // validation
         if (isset($_POST['submit_btn']) || isset($_POST['update_btn'])) {
             if (empty($this->firstname)) {
-                $this->errors['firstname_error'] = "Please enter the firstname.";
+                $this->errors['firstname_error'] = "Please enter the firstnamess.";
             }
 
             if (strlen(trim($this->firstname)) >= 12) {
@@ -103,7 +103,7 @@ class userController
             $_SESSION['isEdit'] = false;
             header("Location: /Dashboard/view/AdminHome.php ");
             exit;
-        } 
+        }
         return $isUpdate;
     }
 
@@ -160,12 +160,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     if (isset($_POST['create_user'])) {
-        // var_dump("dcc");
         $_SESSION['isEdit'] = false;
     }
 
     if (isset($_POST['logout_btn'])) {
         $_SESSION['authenticated'] = false;
+        $_SESSION['role'] = '';
+        $_SESSION['isEdit'] = false;
+        $_SESSION['userId'] = '';
         header("Location: /Dashboard");
         exit;
     }

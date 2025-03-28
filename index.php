@@ -44,7 +44,11 @@ if ($_SESSION['authenticated'] == true && $_SESSION['role'] == 'admin') {
                 <label class="lable" for="password">Password:</label>
 
                 <div>
-                    <input type="" class="input" id="password" name="password" />
+                    <div class="password-container" style="position: relative;">
+                        <!-- <input type="password" class="input" id="password" name="password" value="<?php echo $data['password'] ?? $_POST['password'] ?? ''; ?>" /> -->
+                        <input type="" class="input" id="password" name="password" />
+                        <span class="toggle-eye" onclick="togglePassword()" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">👁️</span>
+                    </div>
                     <!-- <div id="show_password" name="show_password" style="border: 2px solid black; padding: 2px; margin-left: 10px; cursor: pointer  ;" > show </div> -->
                 </div>
 
@@ -63,5 +67,13 @@ if ($_SESSION['authenticated'] == true && $_SESSION['role'] == 'admin') {
 
 
 </body>
+
+
+<script>
+    function togglePassword() {
+        var passwordField = document.getElementById("password");
+        passwordField.type = passwordField.type === "password" ? "text" : "password";
+    }
+</script>
 
 </html>

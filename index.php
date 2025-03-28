@@ -7,6 +7,7 @@ $_SESSION['authenticated'];
 $_SESSION['role'];
 $_SESSION['isEdit'];
 $_SESSION['userId'];
+$_SESSION['isEmailPresent'];
 
 
 if ($_SESSION['authenticated'] == true && $_SESSION['role'] == 'admin') {

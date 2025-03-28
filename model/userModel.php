@@ -114,18 +114,21 @@ class userModel
             // echo __LINE__ .  $this->isConnect->error;
         }
 
+
         // Insert :
-        $insertData = "INSERT INTO userData(firstName, lastName, email, password, role) VALUES ( '$firstname' , '$lastname' , '$email', '$hashPassword', '$userRole')";
-        $insertDataResult = $this->isConnect->query($insertData);
-        if ($insertDataResult) {
-            return $insertData;
-            // header("Location: /Dashboard/view/AdminHome.php");
-            // exit;
-            echo "<script> console.log('data added sucessfully!!!');  </script>";
+
+        $isEmailPresent = " SELECT * FROM userData WHERE email = '$email'";
+        $isEmailPresentResult = $this->isConnect->query($isEmailPresent);
+
+        if ($isEmailPresentResult->num_rows > 0) {
+            return false;
         } else {
-            // header("Location: /Dashboard/view/AddUser.php");
-            // exit;
-            // echo __LINE__ .  $this->isConnect->error;
+            $insertData = "INSERT INTO userData(firstName, lastName, email, password, role) VALUES ( '$firstname' , '$lastname' , '$email', '$hashPassword', '$userRole')";
+            $insertDataResult = $this->isConnect->query($insertData);
+            if ($insertDataResult) {
+                return $insertData;
+                echo "<script> console.log('data added sucessfully!!!');  </script>";
+            }
         }
     }
 
@@ -153,6 +156,7 @@ class userModel
 
     public function edituserData($userId)
     {
+
         $user = " SELECT * FROM userData WHERE Id = '$userId' ";
         $userResult = mysqli_query($this->isConnect, $user);
 

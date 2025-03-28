@@ -16,7 +16,7 @@ if ($_SESSION['authenticated'] !== true) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../assets/style.css">
-    <script defer src="../assets/AddUserFormauth.js"></script>
+    <!-- <script defer src="../assets/AddUserFormauth.js"></script> -->
 </head>
 
 <body>
@@ -56,7 +56,7 @@ if ($_SESSION['authenticated'] !== true) {
                                                             } elseif ($_POST['email']) {
                                                                 echo $_POST['email'];
                                                             }   ?>" />
-        <span class="error" name="email_error" id="email_error"> <?php echo ($userControllerObj->errors['email_error']) ?> </span>
+        <span class="error" name="email_error" id="email_error"> <?php echo($userControllerObj->errors['email_error']) ?> </span>
 
         <?php if (!$_SESSION['isEdit']): ?>
             <lable class="lable" for="password"> Password: </lable>

@@ -27,6 +27,8 @@ class userController
 
 
         // validation
+
+        // var_dump(isset($_POST['update_btn']));
         if (isset($_POST['submit_btn']) || isset($_POST['update_btn'])) {
             if (empty($this->firstname)) {
                 $this->errors['firstname_error'] = "Please enter the firstname.";
@@ -51,13 +53,16 @@ class userController
                 $this->errors['lastname_error'] = "More then 12 char is not allowed in the lastname.";
             }
 
+            if ($_SESSION['isEmailPresent'] == true) {
+                $this->errors['email_error'] = "This email is already present.";
+            }
             if (empty($this->email)) {
                 $this->errors['email_error'] = "Please enter the  email address.";
             }
 
-            if (filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
-                $this->errors['email_error'] = "Please enter the valid email address.";
-            }
+            // if (filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+            //     $this->errors['email_error'] = "Please enter the valid email address.";
+            // }
 
             if (strlen(trim($this->email)) >= 20) {
                 $this->errors['email_error'] = "More then 20 char is not allowed in the email.";
@@ -82,9 +87,7 @@ class userController
     public function InsertData()
     {
         if ($this->firstname && $this->lastname && $this->email && $this->password && $this->role) {
-            // return $this->userModelObject->createUser($this->firstname, $this->lastname, $this->email, $this->password, $this->role);
             $data = $this->userModelObject->createUser($this->firstname, $this->lastname, $this->email, $this->password, $this->role);
-            // var_dump($data);
             return $data;
         }
     }
@@ -128,14 +131,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['submit_btn'])) {
         $_SESSION['isEdit'] = false;
         $data = $userControllerObj->InsertData();
-        // var_dump($data);
-        if ($data == NULL) {
-            // header("Location: " . "/Dashboard/view/AddUser.php");
+        if ($data == false) {
+            $_SESSION['isEmailPresent'] = true;
+            // header("Location: {$_SERVER['PHP-SELF']} ");
             // exit;
         } else {
+            $_SESSION['isEmailPresent'] = false;
             header("Location: " . "/Dashboard/view/AdminHome.php");
             exit;
         }
+        // echo __LINE__;var_dump($_SESSION['isEmailPresent']);
+
     }
 
     if (isset($_POST['editUser'])) {

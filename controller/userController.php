@@ -56,7 +56,7 @@ class userController
             if ($_SESSION['isEmailPresent'] == true) {
                 $this->errors['email_error'] = "This email is already present.";
             }
-            
+
             if (empty($this->email)) {
                 $this->errors['email_error'] = "Please enter the  email address.";
             }
@@ -128,21 +128,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $userControllerObj = new userController();
     $userEditId;
 
-
     if (isset($_POST['submit_btn'])) {
         $_SESSION['isEdit'] = false;
         $data = $userControllerObj->InsertData();
         if ($data == false) {
-            $_SESSION['isEmailPresent'] = true;
-            // header("Location: {$_SERVER['PHP-SELF']} ");
-            // exit;
+            // $_SESSION['isEmailPresent'] = true;
         } else {
-            $_SESSION['isEmailPresent'] = false;
+            // $_SESSION['isEmailPresent'] = false;
             header("Location: " . "/Dashboard/view/AdminHome.php");
             exit;
         }
-        // echo __LINE__;var_dump($_SESSION['isEmailPresent']);
-
     }
 
     if (isset($_POST['editUser'])) {
@@ -152,18 +147,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     if (isset($_POST['update_btn'])) {
-        $firstname = trim($_POST['firstname']);
-        $lastname = trim($_POST['lastname']);
-        $email = trim($_POST['email']);
-        $role = trim($_POST['role']);
-        $id = trim($_POST['userUpdateID']);
+        $firstname = isset($_POST['firstname']) ? trim($_POST['firstname']) : "";
+        $lastname = isset($_POST['lastname']) ?  trim($_POST['lastname']) : "";
+        $email = isset($_POST['email']) ?  trim($_POST['email']) : "";
+        $role  = isset($_POST['role']) ?  trim($_POST['role']) : "";
+        $id =  trim($_POST['userUpdateID']);
         $data = $userControllerObj->updateUserDetails($id, $firstname, $lastname, $email, $role);
-        
-        if ($data) {
-            // $_SESSION['isEmailPresent'] = true;
-        } else {
-            // $_SESSION['isEmailPresent'] = false;
-        }
     }
 
     if (isset($_POST['deleteUser'])) {

@@ -119,10 +119,14 @@ class userModel
 
         $isEmailPresent = " SELECT * FROM userData WHERE email = '$email'";
         $isEmailPresentResult = $this->isConnect->query($isEmailPresent);
+        // echo "model: "; var_dump($isEmailPresentResult);
 
         if ($isEmailPresentResult->num_rows > 0) {
+            $_SESSION['isEmailPresent'] = true;
             return false;
         } else {
+            $_SESSION['isEmailPresent'] = false;
+
             $insertData = "INSERT INTO userData(firstName, lastName, email, password, role) VALUES ( '$firstname' , '$lastname' , '$email', '$hashPassword', '$userRole')";
             $insertDataResult = $this->isConnect->query($insertData);
             if ($insertDataResult) {
@@ -192,7 +196,6 @@ class userModel
                     $_SESSION['isEmailPresent'] = true;
                     return false;
                 } else {
-                    // $_SESSION['isEmailPresent'] = false;
                     $update = " UPDATE userData SET firstName = '$firstname', lastName = '$lastname', email = '$email', role = '$role' WHERE Id = '$userId' ";
                     $updateResult = mysqli_query($this->isConnect, $update);
                     if ($updateResult) {

@@ -177,16 +177,30 @@ class userModel
     // update userdata
     public function updateUserData($userId, $firstname, $lastname, $email, $role)
     {
+        $userPresentEmail = '';
 
         if ($firstname != "" && $lastname != '' && $email != '') {
-            $update = " UPDATE userData SET firstName = '$firstname', lastName = '$lastname', email = '$email', role = '$role' WHERE Id = '$userId' ";
-            $updateResult = mysqli_query($this->isConnect, $update);
-            if ($updateResult) {
-                $_SESSION['isEdit'] = false;
-            } else {
-                $_SESSION['isEdit'] = true;
+            $userData = " SELECT * FROM userData WHERE Id = '$userId' ";
+            $userDataResult =  $this->isConnect->query($userData);
+            if ($userDataResult->num_rows > 0) {
+                $row = $userDataResult->fetch_assoc();
+                $userPresentEmail = $row['email'];
+
+                $isEmailPresent = "SELECT * FROM userData WHERE email != '$userPresentEmail' AND  email = '$email' ";
+                $isEmailPresentResult = $this->isConnect->query($isEmailPresent);
+                if ($isEmailPresentResult->num_rows > 0) {
+                    return false;
+                } else {
+                    $update = " UPDATE userData SET firstName = '$firstname', lastName = '$lastname', email = '$email', role = '$role' WHERE Id = '$userId' ";
+                    $updateResult = mysqli_query($this->isConnect, $update);
+                    if ($updateResult) {
+                        $_SESSION['isEdit'] = false;
+                    } else {
+                        $_SESSION['isEdit'] = true;
+                    }
+                    return $updateResult;
+                }
             }
-            return $updateResult;
         } else {
             return false;
         }

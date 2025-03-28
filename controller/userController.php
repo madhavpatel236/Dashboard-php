@@ -157,6 +157,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $role = trim($_POST['role']);
         $id = trim($_POST['userUpdateID']);
         $data = $userControllerObj->updateUserDetails($id, $firstname, $lastname, $email, $role);
+        
+        if ($data) {
+            $_SESSION['isEmailPresent'] = true;
+        } else {
+            $_SESSION['isEmailPresent'] = false;
+        }
     }
 
     if (isset($_POST['deleteUser'])) {
